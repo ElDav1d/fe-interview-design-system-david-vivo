@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build-storybook": "storybook build",
-    "dev": "vite",
+    "build-tokens": "node scripts/build-tokens.ts",
+    "build-storybook": " run build-tokens && storybook build",
+    "dev": "npm run build-tokens && vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "prettier": "pnpm exec prettier src/ --write",
-    "storybook": "storybook dev -p 6006",
+    "prettier": "npm exec prettier src/ --write",
+    "storybook": "npm run build-tokens && storybook dev -p 6006",
     "test": "vitest run",
     "tsc": "tsc -b"
   },
