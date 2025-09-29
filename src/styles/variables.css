@@ -1,4 +1,7 @@
 :root {
+  --typography-font-family-base: 'Inter', sans-serif;
+  --typography-font-size-m: 14px;
+  --typography-line-height-base: 1.5;
   --color-background: #eee;
   --color-content: #222;
 }

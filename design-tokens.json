@@ -1,4 +1,9 @@
 {
+  "typography": {
+    "fontFamilyBase": { "value": "'Inter', sans-serif" },
+    "fontSizeM": { "value": "14px" },
+    "lineHeightBase": { "value": "1.5" }
+  },
   "color": {
     "background": {
       "value": "#eee"
