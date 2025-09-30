@@ -5,9 +5,9 @@ export interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isSelected?: boolean;
 }
 
-const Tab = ({ labelText, isSelected = false }: TabProps) => {
+const Tab = ({ labelText, isSelected = false, ...rest }: TabProps) => {
   return (
-    <button role="tab" aria-selected={isSelected}>
+    <button role="tab" aria-selected={isSelected} {...rest}>
       {labelText}
     </button>
   );
