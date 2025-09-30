@@ -2,7 +2,33 @@
 
 Hey 👋
 
+This is the base repository for the home test. The repository is created with `vite` and is empty, but contains some packages already installed, in particular:
+
+- `react`
+- `storybook`
+- `vitest`
+
+## Install and run
+
+```bash
+# Install dependencies
+# This project use `pnpm` as package manager, but you can use also `npm` or `yarn`.
+pnpm install
+
+# And run the project
+pnpm dev
+
+# Optional: Run Storybook
+pnpm storybook
+```
+
+## Figma file
+
+The figma file of the home test is available [here](https://www.figma.com/design/OclakAGLSXDoMKLFvwLNMP/%F0%9F%92%BB-Design-System-Home-Test---Tabs-Component?node-id=0-1&t=4pG7NN6HKxgxroDz-1).
+
 ## Fake Design Tokens Pipeline
+
+> "(...)The design is created in Figma, with foundations built in SASS through internal Design Tokens(...)"
 
 To simulate a real-world Design System workflow, this project includes a **fake design tokens pipeline**. This pipeline consumes a local `design-tokens.json` file and generates a `variables.css` file containing CSS custom properties. This demonstrates how design tokens can be managed and distributed in a scalable, production-quality project.
 
@@ -91,28 +117,16 @@ Generates a `variables.css`:
 
 ---
 
-This pipeline is included to showcase my ability to architect scalable, maintainable front-end systems, as would be expected in a real Design System context.
+### Tradeoffs
 
-This is the base repository for the home test. The repository is created with `vite` and is empty, but contains some packages already installed, in particular:
+This is a simulation, therefore I will avoid any rabbit hole that will potentially jeopardize this technical test delivery.
 
-- `react`
-- `storybook`
-- `vitest`
+Some not clean decisions are:
 
-## Install and run
+- As long as variables.css is being generated each time instead of merging the new tokens with the existing ones, I'm importing the font-family at index.css
 
-```bash
-# Install dependencies
-# This project use `pnpm` as package manager, but you can use also `npm` or `yarn`.
-pnpm install
+### My rationale on this
 
-# And run the project
-pnpm dev
+Is this overengineering? YES
 
-# Optional: Run Storybook
-pnpm storybook
-```
-
-## Figma file
-
-The figma file of the home test is available [here](https://www.figma.com/design/OclakAGLSXDoMKLFvwLNMP/%F0%9F%92%BB-Design-System-Home-Test---Tabs-Component?node-id=0-1&t=4pG7NN6HKxgxroDz-1).
+This pipeline is included to showcase my ability and intention to architect scalable, maintainable front-end systems, as would be expected in a real Design System context.
