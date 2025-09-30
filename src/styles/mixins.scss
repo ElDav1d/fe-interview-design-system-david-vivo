@@ -1,7 +1,13 @@
 // typography
 
-@mixin typography-base {
+@mixin font-body-M {
   font-family: var(--typography-font-family-base);
   font-size: var(--typography-font-size-m);
   line-height: var(--typography-line-height-base);
 }
+
+@mixin font-body-S {
+  font-family: var(--typography-font-family-base);
+  font-size: var(--typography-font-size-s);
+  line-height: var(--typography-line-height-base);
+} 

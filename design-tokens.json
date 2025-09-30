@@ -1,15 +1,81 @@
 {
+  "breakpoints": {
+    "tablet": { "value": "768px" }
+  },
   "typography": {
     "fontFamilyBase": { "value": "'Inter', sans-serif" },
     "fontSizeM": { "value": "14px" },
+    "fontSizeS": { "value": "12px" },
+    "fontWeightBold": { "value": "700" },
     "lineHeightBase": { "value": "1.5" }
   },
+  "spacing": {
+    "0": { "value": "0px" },
+    "4XS": { "value": "2px" },
+    "3XS": { "value": "4px" },
+    "2XS": { "value": "8px" },
+    "XS": { "value": "12px" },
+    "S": { "value": "16px" },
+    "M": { "value": "20px" },
+    "L": { "value": "24px" },
+    "XL": { "value": "32px" },
+    "2XL": { "value": "48px" }
+  },
   "color": {
+    "inverse": {
+      "value": "#1B2134"
+    },
+    "inverseHover": {
+      "value": "#343A4E"
+    },
+    "inverseActive": {
+      "value": "#585D71"
+    },
+    "onInverse": {
+      "value": "#FFFFFF"
+    },
+    "onNeutral": {
+      "value": "#1B2134"
+    },
+    "surfaceHigh": {
+      "value": "#F1F1F7"
+    },
+    "surfacePositive": {
+      "value": "#B1FFC7"
+    },
+    "surfaceNegative": {
+      "value": "#FFBFB1"
+    },
+    "surfaceHover": {
+      "value": "#F6F6FA"
+    },
+    "surfaceActive": {
+      "value": "#F1F1F7"
+    },
+    "outLine": {
+      "value": "#D3D3DC"
+    },
+    "outLineHover": {
+      "value": "#C4C5CF"
+    },
+    "black": {
+      "value": "#000000"
+    },
     "background": {
       "value": "#eee"
     },
     "content": {
       "value": "#222"
     }
+  },
+  "borderRadius": {
+    "pillButton": { "value": "100px" },
+    "badge": { "value": "12px" },
+    "badgeMobile": { "value": "8px" }
+  },
+  "border": {
+    "size1": { "value": "1px" },
+    "size2": { "value": "2px" },
+    "size3": { "value": "3px" }
   }
 }
