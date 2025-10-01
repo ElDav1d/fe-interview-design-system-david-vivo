@@ -26,15 +26,16 @@
   --color-surface-active: #F1F1F7;
   --color-outline: #D3D3DC;
   --color-outline-hover: #C4C5CF;
-  --color-focus-ring: #000000;
   --color-background: #eee;
   --color-content: #222;
   --borderRadius-tab-pill: 100px;
+  --borderRadius-tab-underline: 2px;
   --borderRadius-badge-dsk: 12px;
   --borderRadius-badge: 8px;
   --border-width-1: 1px;
   --border-width-2: 2px;
   --border-width-3: 3px;
-  --height-tab-pill: 42px;
-  --height-tab-pill-dsk: 50px;
+  --height-tab: 42px;
+  --height-tab-dsk: 50px;
+  --outline-focus-ring-offset: 2px;
 }

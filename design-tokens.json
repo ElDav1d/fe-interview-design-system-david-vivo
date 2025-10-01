@@ -55,9 +55,6 @@
     "outlineHover": {
       "value": "#C4C5CF"
     },
-    "focusRing": {
-      "value": "#000000"
-    },
     "background": {
       "value": "#eee"
     },
@@ -67,6 +64,7 @@
   },
   "borderRadius": {
     "tabPill": { "value": "100px" },
+    "tabUnderline": { "value": "2px" },
     "badgeDsk": { "value": "12px" },
     "badge": { "value": "8px" }
   },
@@ -76,7 +74,10 @@
     "width-3": { "value": "3px" }
   },
   "height": {
-    "tabPill": { "value": "42px" },
-    "tabPillDsk": { "value": "50px" }
+    "tab": { "value": "42px" },
+    "tabDsk": { "value": "50px" }
+  },
+  "outline": {
+    "focusRingOffset": { "value": "2px" }
   }
 }
