@@ -1,0 +1,53 @@
+@use "../../../styles/mixins.scss" as *;
+
+.tab {
+  @include font-body-S;
+
+  color: var(--color-on-neutral);
+  font-weight: var(--typography-font-weight-bold);
+  border: var(--border-width-1) solid var(--color-outline);
+  border-radius: var(--borderRadius-tab-pill);
+  height: var(--height-tab-pill);
+  padding: 0 var(--spacing-xs);
+  gap: var(--spacing-xs);
+
+  @include bp-tablet-up {
+    @include font-body-M;
+    height: var(--height-tab-pill-dsk);
+    padding: 0 var(--spacing-s);
+    gap: var(--spacing-2xs);
+  }
+
+  &:hover {
+    background-color: var(--color-surface-hover);
+    border-color: var(--color-outline-hover);
+  }
+
+  &:active {
+    background-color: var(--color-surface-active);
+    border-color: var(--color-outline);
+  }
+
+  &:focus-visible {
+    outline: var(--border-width-2) solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  &[aria-selected='true'] {
+    background-color: var(--color-inverse);
+    color: var(--color-on-inverse);
+
+    &:hover {
+      background-color: var(--color-inverse-hover);
+    }
+
+    &:active {
+      background-color: var(--color-inverse-active);
+    }
+
+    &:focus-visible {
+      outline: var(--border-width-2) solid var(--color-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+}

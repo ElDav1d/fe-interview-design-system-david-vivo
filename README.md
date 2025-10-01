@@ -30,21 +30,21 @@ The figma file of the home test is available [here](https://www.figma.com/design
 
 > "(...)The design is created in Figma, with foundations built in SASS through internal Design Tokens(...)"
 
-To simulate a real-world Design System workflow, this project includes a **fake design tokens pipeline**. This pipeline consumes a local `design-tokens.json` file and generates a `variables.css` file containing CSS custom properties. This demonstrates how design tokens can be managed and distributed in a scalable, production-quality project.
+To simulate a real-world Design System workflow, this project includes a **fake design tokens pipeline**. This pipeline consumes a local `design-tokens.json` file and generates a `variables.css` file containing CSS custom properties.
 
 ### How it works
 
 - **Source:**  
-  All design tokens (such as colors, spacing, etc.) are defined in [`design-tokens.json`](./design-tokens.json) at the project root.
+  All Design Tokens (such as colors, spacing, etc.) are defined in [`design-tokens.json`](./design-tokens.json) at the project root.
 
 - **Build Script:**  
   The script [`scripts/build-tokens.ts`](./scripts/build-tokens.ts) reads the JSON file, validates its structure, and outputs a CSS file with variables to [`src/styles/variables.css`](./src/styles/variables.css).
 
 - **Usage:**  
-  The generated `variables.css` is imported globally (e.g., in Storybook and your app), making the design tokens available as CSS variables throughout your components.
+  The generated `variables.css` is imported globally (e.g., in Storybook and your app), making the Design Tokens available as CSS variables throughout the components.
 
 - **Why:**  
-  This setup mimics how modern Design Systems manage and distribute design tokens, ensuring consistency and scalability across projects.
+  This setup mimics Design Tokens management and distribution, ensuring consistency and scalability across projects.
 
 ### Tokens Format
 
@@ -72,7 +72,7 @@ When you run the build script, the tokens are **strictly validated**:
 - Each group must be an object.
 - Each token must be an object with a `value` string property.
 
-If the structure is invalid, the script will **throw a descriptive error** and stop the build. This ensures only valid, well-structured tokens are used in your Design System.
+If the structure is invalid, the script will **throw a descriptive error** and stop the build. This ensures only valid, well-structured tokens are used in the Design System.
 
 **Example error:**
 
@@ -125,8 +125,14 @@ Some not clean decisions are:
 
 - As long as variables.css is being generated each time instead of merging the new tokens with the existing ones, I'm importing the font-family at index.css
 
+- Responsive breakpoints have been excluded from the Design Tokens flow: I couldn't figure out a quick and robust solution to consume the values from the media queries, neither I'm considering an external, more complex builder tool.
+
+- I've hardcoded the entry point of design-tokens.json in buildTokens(), since I couldn't figure out a quick and robust solution
+
+---
+
 ### My rationale on this
 
-Is this overengineering? YES
+Is this **over-engineering**? Absolutely **yes**.
 
 This pipeline is included to showcase my ability and intention to architect scalable, maintainable front-end systems, as would be expected in a real Design System context.

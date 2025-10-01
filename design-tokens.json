@@ -1,7 +1,4 @@
 {
-  "breakpoints": {
-    "tablet": { "value": "768px" }
-  },
   "typography": {
     "fontFamilyBase": { "value": "'Inter', sans-serif" },
     "fontSizeM": { "value": "14px" },
@@ -11,15 +8,15 @@
   },
   "spacing": {
     "0": { "value": "0px" },
-    "4XS": { "value": "2px" },
-    "3XS": { "value": "4px" },
-    "2XS": { "value": "8px" },
-    "XS": { "value": "12px" },
-    "S": { "value": "16px" },
-    "M": { "value": "20px" },
-    "L": { "value": "24px" },
-    "XL": { "value": "32px" },
-    "2XL": { "value": "48px" }
+    "4xs": { "value": "2px" },
+    "3xs": { "value": "4px" },
+    "2xs": { "value": "8px" },
+    "xs": { "value": "12px" },
+    "s": { "value": "16px" },
+    "m": { "value": "20px" },
+    "l": { "value": "24px" },
+    "xl": { "value": "32px" },
+    "2xl": { "value": "48px" }
   },
   "color": {
     "inverse": {
@@ -52,13 +49,13 @@
     "surfaceActive": {
       "value": "#F1F1F7"
     },
-    "outLine": {
+    "outline": {
       "value": "#D3D3DC"
     },
-    "outLineHover": {
+    "outlineHover": {
       "value": "#C4C5CF"
     },
-    "black": {
+    "focusRing": {
       "value": "#000000"
     },
     "background": {
@@ -69,13 +66,17 @@
     }
   },
   "borderRadius": {
-    "pillButton": { "value": "100px" },
-    "badge": { "value": "12px" },
-    "badgeMobile": { "value": "8px" }
+    "tabPill": { "value": "100px" },
+    "badgeDsk": { "value": "12px" },
+    "badge": { "value": "8px" }
   },
   "border": {
-    "size1": { "value": "1px" },
-    "size2": { "value": "2px" },
-    "size3": { "value": "3px" }
+    "width-1": { "value": "1px" },
+    "width-2": { "value": "2px" },
+    "width-3": { "value": "3px" }
+  },
+  "height": {
+    "tabPill": { "value": "42px" },
+    "tabPillDsk": { "value": "50px" }
   }
 }

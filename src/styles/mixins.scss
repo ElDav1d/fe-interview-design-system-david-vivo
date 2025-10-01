@@ -1,3 +1,12 @@
+// breakpoints
+$tablet: 768px;
+
+@mixin bp-tablet-up {
+  @media (min-width: $tablet) {
+    @content;
+  }
+}
+
 // typography
 
 @mixin font-body-M {
@@ -10,4 +19,4 @@
   font-family: var(--typography-font-family-base);
   font-size: var(--typography-font-size-s);
   line-height: var(--typography-line-height-base);
-} 
+}

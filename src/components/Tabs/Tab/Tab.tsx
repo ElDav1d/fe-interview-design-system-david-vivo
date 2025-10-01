@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
+import "./Tab.scss";
 
 export interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   labelText: string;
@@ -7,7 +8,7 @@ export interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Tab = ({ labelText, isSelected = false, ...rest }: TabProps) => {
   return (
-    <button role="tab" aria-selected={isSelected} {...rest}>
+    <button className="tab" role="tab" aria-selected={isSelected} {...rest}>
       {labelText}
     </button>
   );
