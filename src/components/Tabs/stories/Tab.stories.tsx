@@ -8,16 +8,16 @@ const meta: Meta<typeof Tab> = {
     layout: "centered",
   },
   argTypes: {
-    labelText: {
-      variant: {
-        control: "select",
-        options: ["pill", "underline"],
-        description: "The variant of the tab.",
-        table: {
-          type: { summary: "'pill' | 'underline'" },
-          defaultValue: { summary: "'pill'" },
-        },
+    variant: {
+      control: "select",
+      options: ["pill", "underline"],
+      description: "The variant of the tab.",
+      table: {
+        type: { summary: "'pill' | 'underline'" },
+        defaultValue: { summary: "'pill'" },
       },
+    },
+    labelText: {
       control: "text",
       description: "The text label of the tab.",
       table: {
