@@ -1,17 +1,32 @@
 @use "../../../styles/mixins.scss" as *;
 
-.tab-pill {
+/**
+ * Base tab styles shared by all variants.
+ * Using @extend instead of mixin for smaller CSS output (grouped selectors)
+ * and semantic relationship between tab variants in compiled code.
+ */
+ 
+%tab-base {
   @include font-body-M;
 
   color: var(--color-on-neutral);
   font-weight: var(--typography-font-weight-bold);
-  border: var(--border-width-1) solid var(--color-outline);
-  border-radius: var(--borderRadius-tab-pill);
   height: var(--height-tab);
-  padding: var(--spacing-0) var(--spacing-xs);
 
   @include bp-tablet-up {
     height: var(--height-tab-dsk);
+  }
+}
+
+.tab-pill {
+  @extend %tab-base;
+  @include focus-ring ;
+
+  border: var(--border-width-1) solid var(--color-outline);
+  border-radius: var(--borderRadius-tab-pill);
+  padding: var(--spacing-0) var(--spacing-xs);
+
+  @include bp-tablet-up {
     padding: var(--spacing-0) var(--spacing-s);
   }
 
@@ -23,11 +38,6 @@
   &:active {
     background-color: var(--color-surface-active);
     border-color: var(--color-outline);
-  }
-
-  &:focus-visible {
-    outline: var(--border-width-2) solid var(--color-inverse);
-    outline-offset: var(--outline-focus-ring-offset);
   }
 
   &[aria-selected='true'] {
@@ -50,18 +60,12 @@
 }
 
 .tab-underline {
-  @include font-body-M;
+  @extend %tab-base;
+  @include focus-ring ;
 
   position: relative;
-  color: var(--color-on-neutral);
-  font-weight: var(--typography-font-weight-bold);
   border-radius: var(--borderRadius-tab-underline);
-  height: var(--height-tab);
   padding-bottom: 3px;
-
-  @include bp-tablet-up {
-    height: var(--height-tab-dsk);
-  }
 
   &::after {
     content: '';
@@ -79,11 +83,6 @@
     &::after {
       background-color: var(--color-outline-hover);
     }
-  }
-
-  &:focus-visible {
-    outline: var(--border-width-2) solid var(--color-inverse);
-    outline-offset: var(--outline-focus-ring-offset);
   }
 
   &[aria-selected='true'] {

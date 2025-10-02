@@ -1,13 +1,20 @@
-// breakpoints
+
+/* =========================
+   BREAKPOINTS
+   ========================= */
+
 $tablet: 768px;
 
+// parametrize with down option when needed
 @mixin bp-tablet-up {
   @media (min-width: $tablet) {
     @content;
   }
 }
 
-// typography
+/* =========================
+   TYPOGRAPHY
+   ========================= */
 
 @mixin font-body-M {
   font-family: var(--typography-font-family-base);
@@ -19,4 +26,16 @@ $tablet: 768px;
   font-family: var(--typography-font-family-base);
   font-size: var(--typography-font-size-s);
   line-height: var(--typography-line-height-base);
+}
+
+/* =========================
+   ACCESSIBILITY
+   ========================= */
+
+// parametrize with outline width and offset when needed
+@mixin focus-ring {
+  &:focus-visible {
+    outline: var(--border-width-2) solid var(--color-inverse);
+    outline-offset: var(--outline-focus-ring-offset);
+  }
 }
