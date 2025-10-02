@@ -1,6 +1,20 @@
 import { ButtonHTMLAttributes } from "react";
 import "./Tab.scss";
 
+/**
+ * A single tab element used within a TabList.
+ * Handles selection state and accessibility attributes.
+ *
+ * @component
+ * @example
+ * <Tab labelText="Overview" isSelected />
+ *
+ * @param labelText - The visible label of the tab.
+ * @param variant - Visual style of the tab ('pill' or 'underline').
+ * @param isSelected - Whether the tab is currently selected.
+ * @param rest - Additional button attributes
+ */
+
 export interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "pill" | "underline";
   labelText: string;
