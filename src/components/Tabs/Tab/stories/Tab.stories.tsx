@@ -30,7 +30,7 @@ const meta: Meta<typeof Tab> = {
       description: "Whether the tab is selected.",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: "false" }, // <-- use string
+        defaultValue: { summary: "false" },
       },
     },
   },

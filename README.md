@@ -135,4 +135,4 @@ Some not clean decisions are:
 
 Is this **over-engineering**? Absolutely **yes**.
 
-This pipeline is included to showcase my ability and intention to architect scalable, maintainable front-end systems, as would be expected in a real Design System context.
+**\*But** this pipeline is included to showcase my ability and intention to architect scalable, maintainable front-end systems, as would be expected in a real Design System context.
