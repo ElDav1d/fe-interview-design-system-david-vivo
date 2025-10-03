@@ -15,8 +15,10 @@ import "./Tab.scss";
  * @param rest - Additional button attributes
  */
 
+export type TabVariant = "pill" | "underline";
+
 export interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "pill" | "underline";
+  variant?: TabVariant;
   labelText: string;
   isSelected?: boolean;
   className?: string;
