@@ -16,6 +16,8 @@ export interface TabsContextValue {
 export interface TabsProviderProps {
   variant: TabVariant;
   defaultActiveTab: number;
+  value?: number;
+  onChange?: (value: number) => void;
   children: ReactNode;
 }
 
@@ -39,6 +41,7 @@ export const useTabs = (): TabsContextValue => {
 /**
  * Provider component for tabs context
  * Manages the active tab state and variant
+ * Supports both controlled and uncontrolled modes
  *
  * @component
  * @example
@@ -49,18 +52,36 @@ export const useTabs = (): TabsContextValue => {
 export const TabsProvider = ({
   variant,
   defaultActiveTab,
+  value,
+  onChange,
   children,
 }: TabsProviderProps) => {
-  const [activeTab, setActiveTab] = useState<number>(defaultActiveTab);
+  const [internalActiveTab, setInternalActiveTab] =
+    useState<number>(defaultActiveTab);
 
-  const value = useMemo<TabsContextValue>(
+  const isControlled = value !== undefined;
+  const activeTab = isControlled ? value : internalActiveTab;
+
+  const handleSetActiveTab = (newValue: number) => {
+    if (!isControlled) {
+      setInternalActiveTab(newValue);
+    }
+
+    if (onChange) {
+      onChange(newValue);
+    }
+  };
+
+  const contextValue = useMemo<TabsContextValue>(
     () => ({
       variant,
       activeTab,
-      setActiveTab,
+      setActiveTab: handleSetActiveTab,
     }),
-    [variant, activeTab]
+    [variant, activeTab, isControlled, onChange]
   );
 
-  return <TabsContext.Provider value={value}>{children}</TabsContext.Provider>;
+  return (
+    <TabsContext.Provider value={contextValue}>{children}</TabsContext.Provider>
+  );
 };
