@@ -65,13 +65,69 @@ export const PillVariant: Story = {
     defaultActiveTab: "emails",
   },
   render: (args) => (
-    <TabsGroup {...args}>
-      <TabList>
-        <Tab value="emails" labelText="Emails" />
-        <Tab value="files" labelText="Files" />
-        <Tab value="settings" labelText="Settings" />
-      </TabList>
-    </TabsGroup>
+    <div style={{ width: "600px" }}>
+      <TabsGroup {...args}>
+        <TabList>
+          <Tab value="emails" labelText="Emails" />
+          <Tab value="files" labelText="Files" />
+          <Tab value="settings" labelText="Settings" />
+        </TabList>
+
+        <TabPanel value="emails">
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
+            }}
+          >
+            <h3>Emails</h3>
+            <p>You have 12 unread emails in your inbox.</p>
+            <ul>
+              <li>Meeting reminder - 2 hours ago</li>
+              <li>Project update - Yesterday</li>
+              <li>Team announcement - 2 days ago</li>
+            </ul>
+          </div>
+        </TabPanel>
+
+        <TabPanel value="files">
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
+            }}
+          >
+            <h3>Files</h3>
+            <p>Your recent files and documents.</p>
+            <ul>
+              <li>Report.pdf - 1.2 MB</li>
+              <li>Presentation.pptx - 3.4 MB</li>
+              <li>Spreadsheet.xlsx - 890 KB</li>
+            </ul>
+          </div>
+        </TabPanel>
+
+        <TabPanel value="settings">
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
+            }}
+          >
+            <h3>Settings</h3>
+            <p>Configure your account preferences.</p>
+            <ul>
+              <li>Language: English</li>
+              <li>Timezone: UTC-5</li>
+              <li>Theme: Light</li>
+            </ul>
+          </div>
+        </TabPanel>
+      </TabsGroup>
+    </div>
   ),
 };
 
@@ -85,64 +141,88 @@ export const UnderlineVariant: Story = {
     defaultActiveTab: "dashboard",
   },
   render: (args) => (
-    <TabsGroup {...args}>
-      <TabList>
-        <Tab value="dashboard" labelText="Dashboard" />
-        <Tab value="analytics" labelText="Analytics" />
-        <Tab value="reports" labelText="Reports" />
-      </TabList>
-    </TabsGroup>
-  ),
-};
-
-/**
- * Complete tabs system with TabPanel integration.
- * Panels automatically show/hide based on selected tab.
- */
-export const WithTabPanels: Story = {
-  args: {
-    variant: "pill",
-    defaultActiveTab: "overview",
-  },
-  render: (args) => (
     <div style={{ width: "600px" }}>
       <TabsGroup {...args}>
         <TabList>
-          <Tab value="overview" labelText="Overview" />
-          <Tab value="details" labelText="Details" />
-          <Tab value="activity" labelText="Activity" />
+          <Tab value="dashboard" labelText="Dashboard" />
+          <Tab value="analytics" labelText="Analytics" />
+          <Tab value="reports" labelText="Reports" />
         </TabList>
 
-        <TabPanel value="overview">
-          <div style={{ padding: "20px", border: "1px solid #e0e0e0" }}>
-            <h3>Overview</h3>
-            <p>
-              This is the overview panel. It shows general information about
-              your account.
-            </p>
+        <TabPanel value="dashboard">
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
+            }}
+          >
+            <h3>Dashboard</h3>
+            <p>Overview of your key metrics and performance indicators.</p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "16px",
+                marginTop: "16px",
+              }}
+            >
+              <div
+                style={{
+                  padding: "16px",
+                  backgroundColor: "#f0f9ff",
+                  borderRadius: "4px",
+                }}
+              >
+                <strong>Total Users</strong>
+                <p style={{ fontSize: "24px", margin: "8px 0 0" }}>1,234</p>
+              </div>
+              <div
+                style={{
+                  padding: "16px",
+                  backgroundColor: "#f0fdf4",
+                  borderRadius: "4px",
+                }}
+              >
+                <strong>Active Sessions</strong>
+                <p style={{ fontSize: "24px", margin: "8px 0 0" }}>89</p>
+              </div>
+            </div>
           </div>
         </TabPanel>
 
-        <TabPanel value="details">
-          <div style={{ padding: "20px", border: "1px solid #e0e0e0" }}>
-            <h3>Details</h3>
-            <p>Detailed information about your profile and settings.</p>
+        <TabPanel value="analytics">
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
+            }}
+          >
+            <h3>Analytics</h3>
+            <p>Detailed analytics and user behavior insights.</p>
             <ul>
-              <li>User ID: 12345</li>
-              <li>Email: user@example.com</li>
-              <li>Role: Administrator</li>
+              <li>Page views: 45,678</li>
+              <li>Bounce rate: 32%</li>
+              <li>Avg. session: 4m 23s</li>
             </ul>
           </div>
         </TabPanel>
 
-        <TabPanel value="activity">
-          <div style={{ padding: "20px", border: "1px solid #e0e0e0" }}>
-            <h3>Activity Log</h3>
-            <p>Recent activity on your account:</p>
+        <TabPanel value="reports">
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
+            }}
+          >
+            <h3>Reports</h3>
+            <p>Generate and view your custom reports.</p>
             <ul>
-              <li>Logged in - 2 hours ago</li>
-              <li>Updated profile - Yesterday</li>
-              <li>Changed password - 3 days ago</li>
+              <li>Monthly Summary - Available</li>
+              <li>Quarterly Review - In Progress</li>
+              <li>Annual Report - Pending</li>
             </ul>
           </div>
         </TabPanel>
@@ -222,7 +302,7 @@ export const WithCustomClassName: Story = {
     className: "custom-tabs-container",
   },
   render: (args) => (
-    <div>
+    <div style={{ width: "600px" }}>
       <style>
         {`
           .custom-tabs-container {
@@ -239,6 +319,40 @@ export const WithCustomClassName: Story = {
           <Tab value="products" labelText="Products" />
           <Tab value="about" labelText="About" />
         </TabList>
+
+        <TabPanel value="home">
+          <div style={{ padding: "20px", marginTop: "16px" }}>
+            <h3>Welcome Home</h3>
+            <p>This TabsGroup has custom styling applied via className.</p>
+            <p>
+              Notice the gray background, padding, border radius, and shadow on
+              the container.
+            </p>
+          </div>
+        </TabPanel>
+
+        <TabPanel value="products">
+          <div style={{ padding: "20px", marginTop: "16px" }}>
+            <h3>Our Products</h3>
+            <p>Browse our product catalog and offerings.</p>
+            <ul>
+              <li>Product A - Premium</li>
+              <li>Product B - Standard</li>
+              <li>Product C - Basic</li>
+            </ul>
+          </div>
+        </TabPanel>
+
+        <TabPanel value="about">
+          <div style={{ padding: "20px", marginTop: "16px" }}>
+            <h3>About Us</h3>
+            <p>Learn more about our company and mission.</p>
+            <p>
+              Custom className allows flexible styling while maintaining
+              functionality.
+            </p>
+          </div>
+        </TabPanel>
       </TabsGroup>
     </div>
   ),
@@ -254,39 +368,127 @@ export const WithChildrenPlaceholder: Story = {
     defaultActiveTab: "notifications",
   },
   render: (args) => (
-    <TabsGroup {...args}>
-      <TabList>
-        <Tab value="notifications" labelText="Notifications">
-          <span
+    <div style={{ width: "600px" }}>
+      <TabsGroup {...args}>
+        <TabList>
+          <Tab value="notifications" labelText="Notifications">
+            <span
+              style={{
+                marginLeft: "8px",
+                padding: "2px 6px",
+                backgroundColor: "#e74c3c",
+                color: "white",
+                borderRadius: "10px",
+                fontSize: "12px",
+              }}
+            >
+              3
+            </span>
+          </Tab>
+          <Tab value="messages" labelText="Messages">
+            <span
+              style={{
+                marginLeft: "8px",
+                padding: "2px 6px",
+                backgroundColor: "#3498db",
+                color: "white",
+                borderRadius: "10px",
+                fontSize: "12px",
+              }}
+            >
+              12
+            </span>
+          </Tab>
+          <Tab value="alerts" labelText="Alerts" />
+        </TabList>
+
+        <TabPanel value="notifications">
+          <div
             style={{
-              marginLeft: "8px",
-              padding: "2px 6px",
-              backgroundColor: "#e74c3c",
-              color: "white",
-              borderRadius: "10px",
-              fontSize: "12px",
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
             }}
           >
-            3
-          </span>
-        </Tab>
-        <Tab value="messages" labelText="Messages">
-          <span
+            <h3>Notifications (3 new)</h3>
+            <div
+              style={{
+                borderBottom: "1px solid #eee",
+                paddingBottom: "12px",
+                marginBottom: "12px",
+              }}
+            >
+              <strong>System Update</strong>
+              <p style={{ margin: "4px 0", color: "#666" }}>
+                Your system will be updated tonight
+              </p>
+              <small style={{ color: "#999" }}>2 hours ago</small>
+            </div>
+            <div
+              style={{
+                borderBottom: "1px solid #eee",
+                paddingBottom: "12px",
+                marginBottom: "12px",
+              }}
+            >
+              <strong>New Feature</strong>
+              <p style={{ margin: "4px 0", color: "#666" }}>
+                Check out our latest features
+              </p>
+              <small style={{ color: "#999" }}>1 day ago</small>
+            </div>
+            <div>
+              <strong>Maintenance Notice</strong>
+              <p style={{ margin: "4px 0", color: "#666" }}>
+                Scheduled maintenance this weekend
+              </p>
+              <small style={{ color: "#999" }}>2 days ago</small>
+            </div>
+          </div>
+        </TabPanel>
+
+        <TabPanel value="messages">
+          <div
             style={{
-              marginLeft: "8px",
-              padding: "2px 6px",
-              backgroundColor: "#3498db",
-              color: "white",
-              borderRadius: "10px",
-              fontSize: "12px",
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
             }}
           >
-            12
-          </span>
-        </Tab>
-        <Tab value="alerts" labelText="Alerts" />
-      </TabList>
-    </TabsGroup>
+            <h3>Messages (12 unread)</h3>
+            <p>You have 12 new messages from your team members.</p>
+            <ul>
+              <li>
+                <strong>John:</strong> Meeting at 3pm today
+              </li>
+              <li>
+                <strong>Sarah:</strong> Project update ready for review
+              </li>
+              <li>
+                <strong>Mike:</strong> Can you check the latest PR?
+              </li>
+            </ul>
+          </div>
+        </TabPanel>
+
+        <TabPanel value="alerts">
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
+            }}
+          >
+            <h3>Alerts</h3>
+            <p>No new alerts at this time.</p>
+            <p style={{ color: "#666" }}>
+              You're all caught up! We'll notify you when something needs your
+              attention.
+            </p>
+          </div>
+        </TabPanel>
+      </TabsGroup>
+    </div>
   ),
 };
 
@@ -301,14 +503,91 @@ export const AsSemanticElement: Story = {
     as: "nav",
   },
   render: (args) => (
-    <TabsGroup {...args}>
-      <TabList>
-        <Tab value="home" labelText="Home" />
-        <Tab value="products" labelText="Products" />
-        <Tab value="services" labelText="Services" />
-        <Tab value="contact" labelText="Contact" />
-      </TabList>
-    </TabsGroup>
+    <div style={{ width: "600px" }}>
+      <TabsGroup {...args}>
+        <TabList>
+          <Tab value="home" labelText="Home" />
+          <Tab value="products" labelText="Products" />
+          <Tab value="services" labelText="Services" />
+          <Tab value="contact" labelText="Contact" />
+        </TabList>
+
+        <TabPanel value="home">
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
+            }}
+          >
+            <h3>Home</h3>
+            <p>
+              Welcome to our website. This TabsGroup is rendered as a
+              &lt;nav&gt; element for semantic HTML.
+            </p>
+            <p>
+              Using the <code>as</code> prop allows you to choose the
+              appropriate HTML element for your use case.
+            </p>
+          </div>
+        </TabPanel>
+
+        <TabPanel value="products">
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
+            }}
+          >
+            <h3>Products</h3>
+            <p>Explore our range of products designed to meet your needs.</p>
+            <ul>
+              <li>Professional Tools</li>
+              <li>Enterprise Solutions</li>
+              <li>Developer Resources</li>
+            </ul>
+          </div>
+        </TabPanel>
+
+        <TabPanel value="services">
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
+            }}
+          >
+            <h3>Services</h3>
+            <p>Our comprehensive services to support your business growth.</p>
+            <ul>
+              <li>Consulting</li>
+              <li>Technical Support</li>
+              <li>Training & Education</li>
+            </ul>
+          </div>
+        </TabPanel>
+
+        <TabPanel value="contact">
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #e0e0e0",
+              marginTop: "16px",
+            }}
+          >
+            <h3>Contact Us</h3>
+            <p>Get in touch with our team.</p>
+            <p>
+              <strong>Email:</strong> contact@example.com
+            </p>
+            <p>
+              <strong>Phone:</strong> (555) 123-4567
+            </p>
+          </div>
+        </TabPanel>
+      </TabsGroup>
+    </div>
   ),
 };
 
