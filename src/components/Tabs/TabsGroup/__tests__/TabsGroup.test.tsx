@@ -149,3 +149,103 @@ it("applies additional props to container", () => {
   const container = screen.getByTestId("tabs-container");
   expect(container).toHaveAttribute("aria-label", "Main navigation");
 });
+
+it("renders as div by default", () => {
+  render(
+    <TabsGroup data-testid="tabs-container">
+      <TabList>
+        <Tab labelText="Tab 1" />
+      </TabList>
+    </TabsGroup>
+  );
+
+  const container = screen.getByTestId("tabs-container");
+  expect(container.tagName).toBe("DIV");
+});
+
+it("renders as custom element when as prop is provided", () => {
+  render(
+    <TabsGroup as="section" data-testid="tabs-container">
+      <TabList>
+        <Tab labelText="Tab 1" />
+      </TabList>
+    </TabsGroup>
+  );
+
+  const container = screen.getByTestId("tabs-container");
+  expect(container.tagName).toBe("SECTION");
+});
+
+it("renders as nav element when specified", () => {
+  render(
+    <TabsGroup as="nav" data-testid="tabs-container">
+      <TabList>
+        <Tab labelText="Tab 1" />
+      </TabList>
+    </TabsGroup>
+  );
+
+  const container = screen.getByTestId("tabs-container");
+  expect(container.tagName).toBe("NAV");
+});
+
+it("throws error when invalid children are provided", () => {
+  const consoleErrorSpy = vi
+    .spyOn(console, "error")
+    .mockImplementation(() => {});
+
+  expect(() => {
+    render(
+      <TabsGroup>
+        <div>Invalid child</div>
+      </TabsGroup>
+    );
+  }).toThrow();
+
+  consoleErrorSpy.mockRestore();
+});
+
+it("accepts TabList as valid child", () => {
+  render(
+    <TabsGroup>
+      <TabList>
+        <Tab labelText="Tab 1" />
+      </TabList>
+    </TabsGroup>
+  );
+
+  expect(screen.getByRole("tablist")).toBeInTheDocument();
+});
+
+it("accepts TabPanel as valid child", () => {
+  render(
+    <TabsGroup>
+      <TabPanel id="panel-1" isSelected={true}>
+        Panel content
+      </TabPanel>
+    </TabsGroup>
+  );
+
+  expect(screen.getByRole("tabpanel")).toBeInTheDocument();
+});
+
+it("accepts multiple valid children", () => {
+  render(
+    <TabsGroup>
+      <TabList>
+        <Tab labelText="Tab 1" />
+        <Tab labelText="Tab 2" />
+      </TabList>
+      <TabPanel id="panel-1" isSelected={true}>
+        First Panel
+      </TabPanel>
+      <TabPanel id="panel-2" isSelected={false}>
+        Second Panel
+      </TabPanel>
+    </TabsGroup>
+  );
+
+  expect(screen.getByRole("tablist")).toBeInTheDocument();
+  expect(screen.getAllByRole("tab")).toHaveLength(2);
+  expect(screen.getByRole("tabpanel")).toBeInTheDocument();
+});
