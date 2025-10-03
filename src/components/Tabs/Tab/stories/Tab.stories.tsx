@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Tab from "../Tab";
 import TabsGroup from "../../TabsGroup/TabsGroup";
 import TabList from "../../TabList/TabList";
+import { useState } from "react";
 
 const meta: Meta<typeof Tab> = {
   title: "Components/Tabs/Tab",
@@ -25,6 +26,23 @@ const meta: Meta<typeof Tab> = {
         defaultValue: { summary: "''" },
       },
     },
+    variant: {
+      control: "select",
+      options: ["pill", "underline"],
+      description: "Visual style variant. Used in standalone mode.",
+      table: {
+        type: { summary: "'pill' | 'underline'" },
+        defaultValue: { summary: "'pill'" },
+      },
+    },
+    isSelected: {
+      control: "boolean",
+      description: "Whether the tab is selected. Used in standalone mode.",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
     children: {
       control: false,
       description:
@@ -35,60 +53,54 @@ const meta: Meta<typeof Tab> = {
     },
   },
   tags: ["autodocs"],
-  decorators: [
-    (Story, context) => (
-      <TabsGroup variant="pill" defaultActiveTab={context.args.value || "tab1"}>
-        <TabList>
-          <Story />
-        </TabList>
-      </TabsGroup>
-    ),
-  ],
 };
 export default meta;
 
 type Story = StoryObj<typeof Tab>;
 
 export const Pill: Story = {
+  name: "Standalone Pill Tab",
   args: {
     value: "tab1",
     labelText: "Tab 1",
+    variant: "pill",
+    isSelected: true,
   },
-  decorators: [
-    (Story, context) => (
-      <TabsGroup variant="pill" defaultActiveTab={context.args.value || "tab1"}>
-        <TabList>
-          <Story />
-        </TabList>
-      </TabsGroup>
-    ),
-  ],
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Tab can be used standalone by providing variant and isSelected props. No context required.",
+      },
+    },
+  },
 };
 
 export const Underline: Story = {
+  name: "Standalone Underline Tab",
   args: {
     value: "tab1",
     labelText: "Tab 1",
+    variant: "underline",
+    isSelected: true,
   },
-  decorators: [
-    (Story, context) => (
-      <TabsGroup
-        variant="underline"
-        defaultActiveTab={context.args.value || "tab1"}
-      >
-        <TabList>
-          <Story />
-        </TabList>
-      </TabsGroup>
-    ),
-  ],
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The underline variant provides a different visual style. Works standalone with props.",
+      },
+    },
+  },
 };
 
 export const WithChildren: Story = {
-  name: "With Custom Content",
+  name: "Standalone with children",
   args: {
     value: "tab1",
     labelText: "Notifications",
+    variant: "pill",
+    isSelected: true,
     children: (
       <span
         style={{
@@ -105,13 +117,29 @@ export const WithChildren: Story = {
       </span>
     ),
   },
-  decorators: [
-    (Story, context) => (
-      <TabsGroup variant="pill" defaultActiveTab={context.args.value || "tab1"}>
-        <TabList>
-          <Story />
-        </TabList>
-      </TabsGroup>
-    ),
-  ],
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Children prop allows adding custom content like badges, icons, or other React nodes after the label.",
+      },
+    },
+  },
+};
+
+export const WithContext: Story = {
+  name: "With TabsGroup Context",
+  render: () => (
+    <TabsGroup variant="pill" defaultActiveTab="tab2">
+      <Tab value="tab1" labelText="Tab 1" />
+    </TabsGroup>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When used with TabsGroup context, Tab automatically receives variant, isSelected, and onTabSelect. No need to pass these props manually.",
+      },
+    },
+  },
 };

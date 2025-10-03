@@ -3,6 +3,7 @@ import TabPanel from "../TabPanel";
 import TabsGroup from "../../TabsGroup/TabsGroup";
 import TabList from "../../TabList/TabList";
 import Tab from "../../Tab/Tab";
+import { useState } from "react";
 import "./TabPanel.stories.scss";
 
 const meta: Meta<typeof TabPanel> = {
@@ -53,7 +54,7 @@ export default meta;
 type Story = StoryObj<typeof TabPanel>;
 
 export const Standalone: Story = {
-  name: "Standalone (with isSelected prop)",
+  name: "Standalone Panel",
   args: {
     id: "tab-panel-1",
     isSelected: true,
@@ -62,6 +63,14 @@ export const Standalone: Story = {
         This is standalone TabPanel content controlled by isSelected prop.
       </section>
     ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "TabPanel can be used standalone with the isSelected prop to control visibility. No context required.",
+      },
+    },
   },
 };
 
@@ -79,14 +88,76 @@ export const WithStyles: Story = {
     docs: {
       description: {
         story:
-          "This tab panel has custom styles applied via the `className` prop.",
+          "Apply custom styles via className prop. TabPanel provides semantic HTML structure with proper ARIA attributes.",
       },
     },
   },
 };
 
-export const ContextAware: Story = {
-  name: "Context-Aware (with TabsGroup)",
+export const Interactive: Story = {
+  name: "Standalone Interactive Example",
+  render: function InteractiveExample() {
+    const [activeTab, setActiveTab] = useState("tab1");
+    return (
+      <div>
+        <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
+          <Tab
+            value="tab1"
+            labelText="Tab 1"
+            variant="pill"
+            isSelected={activeTab === "tab1"}
+            onTabSelect={() => setActiveTab("tab1")}
+          />
+          <Tab
+            value="tab2"
+            labelText="Tab 2"
+            variant="pill"
+            isSelected={activeTab === "tab2"}
+            onTabSelect={() => setActiveTab("tab2")}
+          />
+          <Tab
+            value="tab3"
+            labelText="Tab 3"
+            variant="pill"
+            isSelected={activeTab === "tab3"}
+            onTabSelect={() => setActiveTab("tab3")}
+          />
+        </div>
+        <div
+          style={{
+            padding: "16px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+          }}
+        >
+          <TabPanel id="panel-1" isSelected={activeTab === "tab1"}>
+            <h3>Tab 1 Content</h3>
+            <p>This is the content for Tab 1.</p>
+          </TabPanel>
+          <TabPanel id="panel-2" isSelected={activeTab === "tab2"}>
+            <h3>Tab 2 Content</h3>
+            <p>This is the content for Tab 2.</p>
+          </TabPanel>
+          <TabPanel id="panel-3" isSelected={activeTab === "tab3"}>
+            <h3>Tab 3 Content</h3>
+            <p>This is the content for Tab 3.</p>
+          </TabPanel>
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Complete standalone example with manual state management. Useful for simple cases or when you need full control.",
+      },
+    },
+  },
+};
+
+export const WithContext: Story = {
+  name: "With TabsGroup Context",
   render: () => (
     <TabsGroup defaultActiveTab="overview" variant="pill">
       <TabList>
@@ -124,14 +195,14 @@ export const ContextAware: Story = {
     docs: {
       description: {
         story:
-          "TabPanel automatically shows/hides based on the active tab in TabsGroup. No need to manually manage isSelected prop.",
+          "When used with TabsGroup context, TabPanel automatically shows/hides based on the active tab. No need to manually manage isSelected prop.",
       },
     },
   },
 };
 
 export const FullExample: Story = {
-  name: "Complete Tabs System",
+  name: "Complete Tabs System with Context",
   render: () => (
     <TabsGroup defaultActiveTab="home" variant="underline">
       <nav>
@@ -194,7 +265,7 @@ export const FullExample: Story = {
     docs: {
       description: {
         story:
-          "Complete example showing Tabs and TabPanels working together with TabsGroup context for state management.",
+          "Complete example showing Tabs and TabPanels working together with TabsGroup context for automatic state management.",
       },
     },
   },
