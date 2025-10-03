@@ -10,10 +10,12 @@ import { useTabs } from "../TabsContext";
 const ContextConsumer = () => {
   const { variant, activeTab } = useTabs();
   return (
-    <div data-testid="context-consumer">
-      <span data-testid="variant">{variant}</span>
-      <span data-testid="active-tab">{activeTab}</span>
-    </div>
+    <dl aria-label="Context values">
+      <dt>Variant</dt>
+      <dd>{variant}</dd>
+      <dt>Active tab</dt>
+      <dd>{activeTab}</dd>
+    </dl>
   );
 };
 
@@ -36,7 +38,8 @@ it("provides default variant pill to context", () => {
     </TabsGroup>
   );
 
-  const variant = screen.getByTestId("variant");
+  const variantTerm = screen.getByText("Variant");
+  const variant = variantTerm.nextElementSibling;
   expect(variant).toHaveTextContent("pill");
 });
 
@@ -47,7 +50,8 @@ it("provides custom variant to context", () => {
     </TabsGroup>
   );
 
-  const variant = screen.getByTestId("variant");
+  const variantTerm = screen.getByText("Variant");
+  const variant = variantTerm.nextElementSibling;
   expect(variant).toHaveTextContent("underline");
 });
 
@@ -58,7 +62,8 @@ it("manages activeTab in uncontrolled mode with defaultActiveTab", () => {
     </TabsGroup>
   );
 
-  const activeTab = screen.getByTestId("active-tab");
+  const activeTabTerm = screen.getByText("Active tab");
+  const activeTab = activeTabTerm.nextElementSibling;
   expect(activeTab).toHaveTextContent("2");
 });
 
@@ -69,7 +74,8 @@ it("uses controlled value when provided", () => {
     </TabsGroup>
   );
 
-  const activeTab = screen.getByTestId("active-tab");
+  const activeTabTerm = screen.getByText("Active tab");
+  const activeTab = activeTabTerm.nextElementSibling;
   expect(activeTab).toHaveTextContent("3");
 });
 
@@ -79,11 +85,7 @@ it("calls onChange callback when activeTab changes", async () => {
 
   const ControlledTabsGroup = () => {
     const { setActiveTab } = useTabs();
-    return (
-      <button onClick={() => setActiveTab(1)} data-testid="change-tab">
-        Change Tab
-      </button>
-    );
+    return <button onClick={() => setActiveTab(1)}>Change Tab</button>;
   };
 
   render(
@@ -92,7 +94,7 @@ it("calls onChange callback when activeTab changes", async () => {
     </TabsGroup>
   );
 
-  const button = screen.getByTestId("change-tab");
+  const button = screen.getByRole("button", { name: "Change Tab" });
   await user.click(button);
 
   expect(handleChange).toHaveBeenCalledWith(1);
@@ -101,11 +103,14 @@ it("calls onChange callback when activeTab changes", async () => {
 it("applies custom className", () => {
   render(
     <TabsGroup className="custom-tabs">
-      <div>Content</div>
+      <TabList>
+        <Tab labelText="Tab 1" />
+      </TabList>
     </TabsGroup>
   );
 
-  const container = screen.getByText("Content").parentElement;
+  const tablist = screen.getByRole("tablist");
+  const container = tablist.parentElement;
   expect(container).toHaveClass("custom-tabs");
 });
 
@@ -135,57 +140,61 @@ it("prioritizes controlled value over defaultActiveTab", () => {
     </TabsGroup>
   );
 
-  const activeTab = screen.getByTestId("active-tab");
+  const activeTabTerm = screen.getByText("Active tab");
+  const activeTab = activeTabTerm.nextElementSibling;
   expect(activeTab).toHaveTextContent("5");
 });
 
 it("applies additional props to container", () => {
   render(
-    <TabsGroup data-testid="tabs-container" aria-label="Main navigation">
-      <div>Content</div>
+    <TabsGroup data-testid="tabs-group" aria-label="Main navigation">
+      <TabList>
+        <Tab labelText="Tab 1" />
+      </TabList>
     </TabsGroup>
   );
 
-  const container = screen.getByTestId("tabs-container");
+  const container = screen.getByTestId("tabs-group");
   expect(container).toHaveAttribute("aria-label", "Main navigation");
 });
 
 it("renders as div by default", () => {
   render(
-    <TabsGroup data-testid="tabs-container">
+    <TabsGroup>
       <TabList>
         <Tab labelText="Tab 1" />
       </TabList>
     </TabsGroup>
   );
 
-  const container = screen.getByTestId("tabs-container");
-  expect(container.tagName).toBe("DIV");
+  const tablist = screen.getByRole("tablist");
+  const container = tablist.parentElement;
+  expect(container?.tagName).toBe("DIV");
 });
 
 it("renders as custom element when as prop is provided", () => {
   render(
-    <TabsGroup as="section" data-testid="tabs-container">
+    <TabsGroup as="section" aria-label="Tabs section">
       <TabList>
         <Tab labelText="Tab 1" />
       </TabList>
     </TabsGroup>
   );
 
-  const container = screen.getByTestId("tabs-container");
+  const container = screen.getByRole("region", { name: "Tabs section" });
   expect(container.tagName).toBe("SECTION");
 });
 
 it("renders as nav element when specified", () => {
   render(
-    <TabsGroup as="nav" data-testid="tabs-container">
+    <TabsGroup as="nav" aria-label="Tabs navigation">
       <TabList>
         <Tab labelText="Tab 1" />
       </TabList>
     </TabsGroup>
   );
 
-  const container = screen.getByTestId("tabs-container");
+  const container = screen.getByRole("navigation", { name: "Tabs navigation" });
   expect(container.tagName).toBe("NAV");
 });
 
