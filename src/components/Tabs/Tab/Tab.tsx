@@ -33,7 +33,7 @@ import "./Tab.scss";
  * @param variant - Visual style ('pill' or 'underline'). Defaults to 'pill'. Overridden by context if present.
  * @param isSelected - Selection state. Managed by context if present, otherwise use this prop.
  * @param onTabSelect - Callback when tab is clicked. Receives tab value. Works with or without context.
- * @param children - Optional content to render after the label (e.g., Badge).
+ * @param children - Optional content to render after the label. Use for badges, icons, or any inline content.
  * @param rest - Additional button attributes
  */
 
@@ -93,7 +93,7 @@ const Tab = ({
       {...rest}
     >
       {labelText}
-      {children && <span className="tab-extras">{children}</span>}
+      {children}
     </button>
   );
 };

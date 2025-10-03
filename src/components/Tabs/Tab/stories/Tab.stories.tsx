@@ -27,7 +27,8 @@ const meta: Meta<typeof Tab> = {
     },
     children: {
       control: false,
-      description: "Optional content to render after the label (e.g., Badge).",
+      description:
+        "Optional content to render after the label. Supports any React node - style as needed.",
       table: {
         type: { summary: "ReactNode" },
       },
@@ -84,6 +85,7 @@ export const Underline: Story = {
 };
 
 export const WithChildren: Story = {
+  name: "With Custom Content",
   args: {
     value: "tab1",
     labelText: "Notifications",
@@ -96,6 +98,7 @@ export const WithChildren: Story = {
           padding: "2px 6px",
           fontSize: "12px",
           fontWeight: "bold",
+          marginLeft: "6px",
         }}
       >
         3
