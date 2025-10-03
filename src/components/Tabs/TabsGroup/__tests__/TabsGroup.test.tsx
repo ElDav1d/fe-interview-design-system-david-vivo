@@ -7,6 +7,10 @@ import TabList from "../../TabList/TabList";
 import TabPanel from "../../TabPanel/TabPanel";
 import { useTabs } from "../TabsContext";
 
+// ContextConsumer: Utility for tests.
+// Reads tab context (variant, activeTab) using useTabs
+// and displays them in a semantic <dl> for easy assertions.
+// Helps verify context propagation and state in TabsGroup tests.
 const ContextConsumer = () => {
   const { variant, activeTab } = useTabs();
   return (
