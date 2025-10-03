@@ -5,8 +5,8 @@ import {
   Children,
   isValidElement,
 } from "react";
-import Tab, { TabVariant } from "../Tab/Tab";
-import { TabsProvider } from "./TabsContext";
+import Tab from "../Tab/Tab";
+import { TabsProvider, TabVariant } from "./TabsContext";
 import TabList from "../TabList/TabList";
 import TabPanel from "../TabPanel/TabPanel";
 
@@ -17,9 +17,9 @@ import TabPanel from "../TabPanel/TabPanel";
  * @component
  * @example
  * // Uncontrolled mode
- * <TabsGroup defaultActiveTab={0}>
+ * <TabsGroup defaultActiveTab="overview">
  *   <TabList>
- *     <Tab labelText="Tab 1" />
+ *     <Tab value="overview" labelText="Overview" />
  *   </TabList>
  * </TabsGroup>
  *
@@ -27,13 +27,13 @@ import TabPanel from "../TabPanel/TabPanel";
  * // Controlled mode
  * <TabsGroup value={activeTab} onChange={setActiveTab}>
  *   <TabList>
- *     <Tab labelText="Tab 1" />
+ *     <Tab value="overview" labelText="Overview" />
  *   </TabList>
  * </TabsGroup>
  *
  * @param variant - Visual style variant ('pill' or 'underline'). Defaults to 'pill'.
- * @param defaultActiveTab - Initial active tab index for uncontrolled mode.
- * @param value - Active tab index for controlled mode.
+ * @param defaultActiveTab - Initial active tab value for uncontrolled mode.
+ * @param value - Active tab value for controlled mode.
  * @param onChange - Callback fired when active tab changes.
  * @param as - HTML element type to render as container. Defaults to 'div'.
  * @param children - Only TabList, TabPanel, and Tab components are allowed.
@@ -43,9 +43,9 @@ import TabPanel from "../TabPanel/TabPanel";
 
 export interface TabsGroupProps {
   variant?: TabVariant;
-  defaultActiveTab?: number;
-  value?: number;
-  onChange?: (value: number) => void;
+  defaultActiveTab?: string;
+  value?: string;
+  onChange?: (value: string) => void;
   as?: ElementType;
   children: ReactNode;
   className?: string;
@@ -83,7 +83,7 @@ const validateChildren = (children: ReactNode): void => {
 
 const TabsGroup = ({
   variant = "pill",
-  defaultActiveTab = 0,
+  defaultActiveTab = "",
   value,
   onChange,
   as: Component = "div",

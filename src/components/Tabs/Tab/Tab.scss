@@ -18,6 +18,12 @@
   }
 }
 
+.tab-extras {
+  display: inline-flex;
+  align-items: center;
+  margin-left: var(--spacing-2xs);
+}
+
 .tab-pill {
   @extend %tab-base;
   @include focus-ring ;

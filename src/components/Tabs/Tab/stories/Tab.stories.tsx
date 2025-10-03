@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Tab from "../Tab";
+import TabsGroup from "../../TabsGroup/TabsGroup";
+import TabList from "../../TabList/TabList";
 
 const meta: Meta<typeof Tab> = {
   title: "Components/Tabs/Tab",
@@ -8,13 +10,11 @@ const meta: Meta<typeof Tab> = {
     layout: "centered",
   },
   argTypes: {
-    variant: {
-      control: "select",
-      options: ["pill", "underline"],
-      description: "The variant of the tab.",
+    value: {
+      control: "text",
+      description: "Unique identifier for the tab.",
       table: {
-        type: { summary: "'pill' | 'underline'" },
-        defaultValue: { summary: "'pill'" },
+        type: { summary: "string" },
       },
     },
     labelText: {
@@ -25,16 +25,24 @@ const meta: Meta<typeof Tab> = {
         defaultValue: { summary: "''" },
       },
     },
-    isSelected: {
-      control: "boolean",
-      description: "Whether the tab is selected.",
+    children: {
+      control: false,
+      description: "Optional content to render after the label (e.g., Badge).",
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: "ReactNode" },
       },
     },
   },
   tags: ["autodocs"],
+  decorators: [
+    (Story, context) => (
+      <TabsGroup variant="pill" defaultActiveTab={context.args.value || "tab1"}>
+        <TabList>
+          <Story />
+        </TabList>
+      </TabsGroup>
+    ),
+  ],
 };
 export default meta;
 
@@ -42,16 +50,65 @@ type Story = StoryObj<typeof Tab>;
 
 export const Pill: Story = {
   args: {
-    variant: "pill",
+    value: "tab1",
     labelText: "Tab 1",
-    isSelected: false,
   },
+  decorators: [
+    (Story, context) => (
+      <TabsGroup variant="pill" defaultActiveTab={context.args.value || "tab1"}>
+        <TabList>
+          <Story />
+        </TabList>
+      </TabsGroup>
+    ),
+  ],
 };
 
 export const Underline: Story = {
   args: {
-    variant: "underline",
+    value: "tab1",
     labelText: "Tab 1",
-    isSelected: false,
   },
+  decorators: [
+    (Story, context) => (
+      <TabsGroup
+        variant="underline"
+        defaultActiveTab={context.args.value || "tab1"}
+      >
+        <TabList>
+          <Story />
+        </TabList>
+      </TabsGroup>
+    ),
+  ],
+};
+
+export const WithChildren: Story = {
+  args: {
+    value: "tab1",
+    labelText: "Notifications",
+    children: (
+      <span
+        style={{
+          backgroundColor: "#dc2626",
+          color: "white",
+          borderRadius: "10px",
+          padding: "2px 6px",
+          fontSize: "12px",
+          fontWeight: "bold",
+        }}
+      >
+        3
+      </span>
+    ),
+  },
+  decorators: [
+    (Story, context) => (
+      <TabsGroup variant="pill" defaultActiveTab={context.args.value || "tab1"}>
+        <TabList>
+          <Story />
+        </TabList>
+      </TabsGroup>
+    ),
+  ],
 };

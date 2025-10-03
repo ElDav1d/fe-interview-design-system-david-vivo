@@ -11,7 +11,7 @@ it("throws error when used outside TabsGroup", () => {
 
 it("returns initial context values", () => {
   const wrapper = ({ children }: { children: ReactNode }) => (
-    <TabsProvider variant="pill" defaultActiveTab={0}>
+    <TabsProvider variant="pill" defaultActiveTab="tab0">
       {children}
     </TabsProvider>
   );
@@ -19,13 +19,13 @@ it("returns initial context values", () => {
   const { result } = renderHook(() => useTabs(), { wrapper });
 
   expect(result.current.variant).toBe("pill");
-  expect(result.current.activeTab).toBe(0);
+  expect(result.current.activeTab).toBe("tab0");
   expect(typeof result.current.setActiveTab).toBe("function");
 });
 
 it("updates activeTab when setActiveTab is called", () => {
   const wrapper = ({ children }: { children: ReactNode }) => (
-    <TabsProvider variant="pill" defaultActiveTab={0}>
+    <TabsProvider variant="pill" defaultActiveTab="tab0">
       {children}
     </TabsProvider>
   );
@@ -33,25 +33,25 @@ it("updates activeTab when setActiveTab is called", () => {
   const { result } = renderHook(() => useTabs(), { wrapper });
 
   act(() => {
-    result.current.setActiveTab(2);
+    result.current.setActiveTab("tab2");
   });
 
-  expect(result.current.activeTab).toBe(2);
+  expect(result.current.activeTab).toBe("tab2");
 });
 
 it("maintains state across re-renders", () => {
   const wrapper = ({ children }: { children: ReactNode }) => (
-    <TabsProvider variant="underline" defaultActiveTab={1}>
+    <TabsProvider variant="underline" defaultActiveTab="tab1">
       {children}
     </TabsProvider>
   );
   const { result, rerender } = renderHook(() => useTabs(), { wrapper });
 
   act(() => {
-    result.current.setActiveTab(2);
+    result.current.setActiveTab("tab2");
   });
 
   rerender();
 
-  expect(result.current.activeTab).toBe(2);
+  expect(result.current.activeTab).toBe("tab2");
 });

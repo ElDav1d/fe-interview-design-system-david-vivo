@@ -2,12 +2,15 @@ import { render, screen } from "@testing-library/react";
 import { expect, it } from "vitest";
 import TabList from "../TabList";
 import Tab from "../../Tab/Tab";
+import TabsGroup from "../../TabsGroup/TabsGroup";
 
 it("renders with role tablist", () => {
   render(
-    <TabList>
-      <Tab labelText="Tab 1" />
-    </TabList>
+    <TabsGroup defaultActiveTab="tab1">
+      <TabList>
+        <Tab value="tab1" labelText="Tab 1" />
+      </TabList>
+    </TabsGroup>
   );
 
   expect(screen.getByRole("tablist")).toBeInTheDocument();
@@ -15,9 +18,11 @@ it("renders with role tablist", () => {
 
 it("is horizontal", () => {
   render(
-    <TabList>
-      <Tab labelText="Tab 1" />
-    </TabList>
+    <TabsGroup defaultActiveTab="tab1">
+      <TabList>
+        <Tab value="tab1" labelText="Tab 1" />
+      </TabList>
+    </TabsGroup>
   );
 
   const tablist = screen.getByRole("tablist");
@@ -28,10 +33,12 @@ it("is horizontal", () => {
 
 it("renders children", () => {
   render(
-    <TabList>
-      <Tab labelText="Tab 1" />
-      <Tab labelText="Tab 2" />
-    </TabList>
+    <TabsGroup defaultActiveTab="tab1">
+      <TabList>
+        <Tab value="tab1" labelText="Tab 1" />
+        <Tab value="tab2" labelText="Tab 2" />
+      </TabList>
+    </TabsGroup>
   );
 
   expect(screen.getByRole("tab", { name: "Tab 1" })).toBeInTheDocument();
@@ -40,9 +47,11 @@ it("renders children", () => {
 
 it("applies custom className", () => {
   render(
-    <TabList className="custom-class">
-      <Tab labelText="Tab 1" />
-    </TabList>
+    <TabsGroup defaultActiveTab="tab1">
+      <TabList className="custom-class">
+        <Tab value="tab1" labelText="Tab 1" />
+      </TabList>
+    </TabsGroup>
   );
 
   const tablist = screen.getByRole("tablist");
@@ -53,9 +62,11 @@ it("applies custom className", () => {
 
 it("applies additional props", () => {
   render(
-    <TabList id="custom-id" data-test="test-value">
-      <Tab labelText="Tab 1" />
-    </TabList>
+    <TabsGroup defaultActiveTab="tab1">
+      <TabList id="custom-id" data-test="test-value">
+        <Tab value="tab1" labelText="Tab 1" />
+      </TabList>
+    </TabsGroup>
   );
 
   const tablist = screen.getByRole("tablist");

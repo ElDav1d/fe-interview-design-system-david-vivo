@@ -1,13 +1,14 @@
 import { createContext, useContext, useState, useMemo, ReactNode } from "react";
-import { TabVariant } from "../Tab/Tab";
+
+export type TabVariant = "pill" | "underline";
 
 /**
  * Context value for managing tab state
  */
 export interface TabsContextValue {
   variant: TabVariant;
-  activeTab: number;
-  setActiveTab: (value: number) => void;
+  activeTab: string;
+  setActiveTab: (value: string) => void;
 }
 
 /**
@@ -15,9 +16,9 @@ export interface TabsContextValue {
  */
 export interface TabsProviderProps {
   variant: TabVariant;
-  defaultActiveTab: number;
-  value?: number;
-  onChange?: (value: number) => void;
+  defaultActiveTab: string;
+  value?: string;
+  onChange?: (value: string) => void;
   children: ReactNode;
 }
 
@@ -57,12 +58,12 @@ export const TabsProvider = ({
   children,
 }: TabsProviderProps) => {
   const [internalActiveTab, setInternalActiveTab] =
-    useState<number>(defaultActiveTab);
+    useState<string>(defaultActiveTab);
 
   const isControlled = value !== undefined;
   const activeTab = isControlled ? value : internalActiveTab;
 
-  const handleSetActiveTab = (newValue: number) => {
+  const handleSetActiveTab = (newValue: string) => {
     if (!isControlled) {
       setInternalActiveTab(newValue);
     }

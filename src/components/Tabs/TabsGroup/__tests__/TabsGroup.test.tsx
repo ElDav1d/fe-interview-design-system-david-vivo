@@ -27,7 +27,7 @@ it("renders children correctly", () => {
   render(
     <TabsGroup>
       <TabList>
-        <Tab labelText="Tab 1" />
+        <Tab value="tab1" labelText="Tab 1" />
       </TabList>
     </TabsGroup>
   );
@@ -61,26 +61,26 @@ it("provides custom variant to context", () => {
 
 it("manages activeTab in uncontrolled mode with defaultActiveTab", () => {
   render(
-    <TabsGroup defaultActiveTab={2}>
+    <TabsGroup defaultActiveTab="tab2">
       <ContextConsumer />
     </TabsGroup>
   );
 
   const activeTabTerm = screen.getByText("Active tab");
   const activeTab = activeTabTerm.nextElementSibling;
-  expect(activeTab).toHaveTextContent("2");
+  expect(activeTab).toHaveTextContent("tab2");
 });
 
 it("uses controlled value when provided", () => {
   render(
-    <TabsGroup value={3}>
+    <TabsGroup value="tab3">
       <ContextConsumer />
     </TabsGroup>
   );
 
   const activeTabTerm = screen.getByText("Active tab");
   const activeTab = activeTabTerm.nextElementSibling;
-  expect(activeTab).toHaveTextContent("3");
+  expect(activeTab).toHaveTextContent("tab3");
 });
 
 it("calls onChange callback when activeTab changes", async () => {
@@ -89,7 +89,7 @@ it("calls onChange callback when activeTab changes", async () => {
 
   const ControlledTabsGroup = () => {
     const { setActiveTab } = useTabs();
-    return <button onClick={() => setActiveTab(1)}>Change Tab</button>;
+    return <button onClick={() => setActiveTab("tab1")}>Change Tab</button>;
   };
 
   render(
@@ -101,14 +101,14 @@ it("calls onChange callback when activeTab changes", async () => {
   const button = screen.getByRole("button", { name: "Change Tab" });
   await user.click(button);
 
-  expect(handleChange).toHaveBeenCalledWith(1);
+  expect(handleChange).toHaveBeenCalledWith("tab1");
 });
 
 it("applies custom className", () => {
   render(
     <TabsGroup className="custom-tabs">
       <TabList>
-        <Tab labelText="Tab 1" />
+        <Tab value="tab1" labelText="Tab 1" />
       </TabList>
     </TabsGroup>
   );
@@ -120,10 +120,10 @@ it("applies custom className", () => {
 
 it("combines multiple children with context", () => {
   render(
-    <TabsGroup defaultActiveTab={0}>
+    <TabsGroup defaultActiveTab="tab1">
       <TabList>
-        <Tab labelText="First" />
-        <Tab labelText="Second" />
+        <Tab value="tab1" labelText="First" />
+        <Tab value="tab2" labelText="Second" />
       </TabList>
       <TabPanel id="panel-1" isSelected={true}>
         First Panel
@@ -139,21 +139,21 @@ it("combines multiple children with context", () => {
 
 it("prioritizes controlled value over defaultActiveTab", () => {
   render(
-    <TabsGroup value={5} defaultActiveTab={2}>
+    <TabsGroup value="tab5" defaultActiveTab="tab2">
       <ContextConsumer />
     </TabsGroup>
   );
 
   const activeTabTerm = screen.getByText("Active tab");
   const activeTab = activeTabTerm.nextElementSibling;
-  expect(activeTab).toHaveTextContent("5");
+  expect(activeTab).toHaveTextContent("tab5");
 });
 
 it("applies additional props to container", () => {
   render(
     <TabsGroup data-testid="tabs-group" aria-label="Main navigation">
       <TabList>
-        <Tab labelText="Tab 1" />
+        <Tab value="tab1" labelText="Tab 1" />
       </TabList>
     </TabsGroup>
   );
@@ -166,7 +166,7 @@ it("renders as div by default", () => {
   render(
     <TabsGroup>
       <TabList>
-        <Tab labelText="Tab 1" />
+        <Tab value="tab1" labelText="Tab 1" />
       </TabList>
     </TabsGroup>
   );
@@ -180,7 +180,7 @@ it("renders as custom element when as prop is provided", () => {
   render(
     <TabsGroup as="section" aria-label="Tabs section">
       <TabList>
-        <Tab labelText="Tab 1" />
+        <Tab value="tab1" labelText="Tab 1" />
       </TabList>
     </TabsGroup>
   );
@@ -193,7 +193,7 @@ it("renders as nav element when specified", () => {
   render(
     <TabsGroup as="nav" aria-label="Tabs navigation">
       <TabList>
-        <Tab labelText="Tab 1" />
+        <Tab value="tab1" labelText="Tab 1" />
       </TabList>
     </TabsGroup>
   );
@@ -222,7 +222,7 @@ it("accepts TabList as valid child", () => {
   render(
     <TabsGroup>
       <TabList>
-        <Tab labelText="Tab 1" />
+        <Tab value="tab1" labelText="Tab 1" />
       </TabList>
     </TabsGroup>
   );
@@ -246,8 +246,8 @@ it("accepts multiple valid children", () => {
   render(
     <TabsGroup>
       <TabList>
-        <Tab labelText="Tab 1" />
-        <Tab labelText="Tab 2" />
+        <Tab value="tab1" labelText="Tab 1" />
+        <Tab value="tab2" labelText="Tab 2" />
       </TabList>
       <TabPanel id="panel-1" isSelected={true}>
         First Panel
