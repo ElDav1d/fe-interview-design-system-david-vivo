@@ -248,14 +248,11 @@ export const ControlledMode: Story = {
 
     return (
       <div style={{ width: "600px" }}>
-        <div style={{ marginBottom: "20px" }}>
-          <p>
-            <strong>External Control:</strong>
-          </p>
-          <button onClick={() => setActiveTab("inbox")}>Go to Inbox</button>
-          <button onClick={() => setActiveTab("sent")}>Go to Sent</button>
-          <button onClick={() => setActiveTab("drafts")}>Go to Drafts</button>
-        </div>
+        <h2>
+          This is the parent component and it controls the active tab. It stores
+          its value its local state, then it prints it.
+        </h2>
+        <h1 style={{ marginBottom: "20px" }}>Current Tab: {activeTab}</h1>
 
         <TabsGroup
           variant="underline"
@@ -289,10 +286,6 @@ export const ControlledMode: Story = {
             </div>
           </TabPanel>
         </TabsGroup>
-
-        <div style={{ marginTop: "20px", fontSize: "14px", color: "#666" }}>
-          Current active tab: <strong>{activeTab}</strong>
-        </div>
       </div>
     );
   },
@@ -300,7 +293,7 @@ export const ControlledMode: Story = {
     docs: {
       description: {
         story:
-          "Controlled mode allows external state management. Use value and onChange props to control which tab is active from outside the component.",
+          "Controlled mode allows external state management. The parent component stores the active tab value and renders it in an H1 element, demonstrating how you can use the tab state for validation, analytics, URL persistence, or conditional rendering.",
       },
     },
   },
