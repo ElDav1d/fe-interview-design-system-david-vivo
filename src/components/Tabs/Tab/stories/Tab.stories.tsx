@@ -57,48 +57,48 @@ export default meta;
 type Story = StoryObj<typeof Tab>;
 
 export const Pill: Story = {
-  name: "Standalone Pill Tab",
+  name: "Pill Tab",
   args: {
     value: "tab1",
     labelText: "Tab 1",
     variant: "pill",
-    isSelected: true,
+    isSelected: false,
   },
   parameters: {
     docs: {
       description: {
         story:
-          "Tab can be used standalone by providing variant and isSelected props. No context required.",
+          "A pill-style tab button. The proper usage is with TabsGroup context for composition-based API, though standalone mode is allowed for flexibility.",
       },
     },
   },
 };
 
 export const Underline: Story = {
-  name: "Standalone Underline Tab",
+  name: "Underline Tab",
   args: {
     value: "tab1",
     labelText: "Tab 1",
     variant: "underline",
-    isSelected: true,
+    isSelected: false,
   },
   parameters: {
     docs: {
       description: {
         story:
-          "The underline variant provides a different visual style. Works standalone with props.",
+          "An underline-style tab button. The proper usage is with TabsGroup context for composition-based API, though standalone mode is allowed for flexibility.",
       },
     },
   },
 };
 
 export const WithChildren: Story = {
-  name: "Standalone with children",
+  name: "With Children (e.g. Badge)",
   args: {
     value: "tab1",
     labelText: "Notifications",
     variant: "pill",
-    isSelected: true,
+    isSelected: false,
     children: (
       <span
         style={{
@@ -119,14 +119,14 @@ export const WithChildren: Story = {
     docs: {
       description: {
         story:
-          "Children prop allows adding custom content like badges, icons, or other React nodes after the label.",
+          "The children prop allows adding custom content like badges, icons, or other React nodes after the label. Works with both context and standalone modes.",
       },
     },
   },
 };
 
 export const WithContext: Story = {
-  name: "With TabsGroup Context",
+  name: "With TabsGroup Context (Recommended)",
   render: () => (
     <TabsGroup variant="pill" defaultActiveTab="tab2">
       <Tab value="tab1" labelText="Tab 1" />
@@ -136,7 +136,7 @@ export const WithContext: Story = {
     docs: {
       description: {
         story:
-          "When used with TabsGroup context, Tab automatically receives variant, isSelected, and onTabSelect. No need to pass these props manually.",
+          "The proper way to use Tab: within TabsGroup context for composition-based API. The context automatically provides variant, isSelected, and onTabSelect - no need to pass these props manually.",
       },
     },
   },

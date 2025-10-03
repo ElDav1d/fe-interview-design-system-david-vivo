@@ -25,7 +25,7 @@ export default meta;
 type Story = StoryObj<typeof TabList>;
 
 export const Default: Story = {
-  name: "Standalone with Pill Tabs",
+  name: "With Pill Tabs",
   render: (args) => (
     <TabList {...args}>
       <Tab value="tab1" labelText="Tab 1" variant="pill" isSelected={true} />
@@ -37,14 +37,14 @@ export const Default: Story = {
     docs: {
       description: {
         story:
-          "TabList is a semantic container for Tab components. Works standalone by providing variant and isSelected props to each Tab.",
+          "TabList is a semantic container for Tab components, providing proper accessibility structure (role='tablist'). The proper usage is with TabsGroup context, though standalone mode is allowed for flexibility.",
       },
     },
   },
 };
 
 export const WithUnderlineTabs: Story = {
-  name: "Standalone with Underline Tabs",
+  name: "With Underline Tabs",
   render: (args) => (
     <TabList {...args}>
       <Tab
@@ -61,14 +61,14 @@ export const WithUnderlineTabs: Story = {
     docs: {
       description: {
         story:
-          "TabList works with any Tab variant. Here showing underline style tabs in standalone mode.",
+          "TabList works with any Tab variant. Here showing underline style tabs.",
       },
     },
   },
 };
 
 export const WithCustomStyles: Story = {
-  name: "Standalone with Custom Styles",
+  name: "With Custom Styles",
   args: {
     className: "custom-tablist",
   },
@@ -83,7 +83,7 @@ export const WithCustomStyles: Story = {
     docs: {
       description: {
         story:
-          "Apply custom styles via className prop. TabList provides semantic HTML structure with role='tablist'.",
+          "Custom styles can be applied via className prop. TabList provides semantic HTML structure with proper accessibility attributes.",
       },
     },
   },

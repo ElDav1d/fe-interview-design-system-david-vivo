@@ -54,13 +54,13 @@ export default meta;
 type Story = StoryObj<typeof TabPanel>;
 
 export const Standalone: Story = {
-  name: "Standalone Panel",
+  name: "Basic Panel",
   args: {
     id: "tab-panel-1",
     isSelected: true,
     children: (
       <section>
-        This is standalone TabPanel content controlled by isSelected prop.
+        This is TabPanel content with proper accessibility attributes.
       </section>
     ),
   },
@@ -68,14 +68,14 @@ export const Standalone: Story = {
     docs: {
       description: {
         story:
-          "TabPanel can be used standalone with the isSelected prop to control visibility. No context required.",
+          "TabPanel displays content with proper accessibility attributes. The proper usage is with TabsGroup context for automatic visibility management, though standalone mode with isSelected prop is allowed for flexibility.",
       },
     },
   },
 };
 
 export const WithStyles: Story = {
-  name: "Standalone with Custom Styles",
+  name: "With Custom Styles",
   args: {
     id: "tab-panel-2",
     isSelected: true,
@@ -88,7 +88,7 @@ export const WithStyles: Story = {
     docs: {
       description: {
         story:
-          "Apply custom styles via className prop. TabPanel provides semantic HTML structure with proper ARIA attributes.",
+          "Custom styles can be applied via className prop. TabPanel provides semantic HTML structure with proper ARIA attributes.",
       },
     },
   },
@@ -150,14 +150,14 @@ export const Interactive: Story = {
     docs: {
       description: {
         story:
-          "Complete standalone example with manual state management. Useful for simple cases or when you need full control.",
+          "Example with manual state management. Demonstrates flexibility when full control is needed, though TabsGroup context is recommended for typical use cases.",
       },
     },
   },
 };
 
 export const WithContext: Story = {
-  name: "With TabsGroup Context",
+  name: "With TabsGroup Context (Recommended)",
   render: () => (
     <TabsGroup defaultActiveTab="overview" variant="pill">
       <TabList>
@@ -195,14 +195,14 @@ export const WithContext: Story = {
     docs: {
       description: {
         story:
-          "When used with TabsGroup context, TabPanel automatically shows/hides based on the active tab. No need to manually manage isSelected prop.",
+          "The proper way to use TabPanel: within TabsGroup context for composition-based API. Panels automatically show/hide based on the active tab - no need to manually manage isSelected prop.",
       },
     },
   },
 };
 
 export const FullExample: Story = {
-  name: "Complete Tabs System with Context",
+  name: "Complete Tabs System",
   render: () => (
     <TabsGroup defaultActiveTab="home" variant="underline">
       <nav>
@@ -265,7 +265,7 @@ export const FullExample: Story = {
     docs: {
       description: {
         story:
-          "Complete example showing Tabs and TabPanels working together with TabsGroup context for automatic state management.",
+          "Complete example demonstrating the proper composition-based API: TabsGroup provides context for automatic state management, Tab components handle interactions, and TabPanel components display content.",
       },
     },
   },
