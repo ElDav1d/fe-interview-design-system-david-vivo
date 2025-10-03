@@ -1,52 +1,62 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import Tab from "../Tab";
 import TabsGroup from "../../TabsGroup/TabsGroup";
 import TabList from "../../TabList/TabList";
 
 it("displays the correct label text", () => {
-  render(
-    <TabsGroup defaultActiveTab="tab1">
-      <TabList>
-        <Tab value="tab1" labelText="Tab 1" />
-      </TabList>
-    </TabsGroup>
-  );
+  render(<Tab value="tab1" labelText="Tab 1" />);
 
   expect(screen.getByRole("tab")).toHaveTextContent("Tab 1");
 });
 
-it("is not selected when not matching activeTab", () => {
-  render(
-    <TabsGroup defaultActiveTab="tab1">
-      <TabList>
-        <Tab value="tab1" labelText="Tab 1" />
-        <Tab value="tab2" labelText="Tab 2" />
-      </TabList>
-    </TabsGroup>
-  );
+it("is not selected by default in standalone mode", () => {
+  render(<Tab value="tab1" labelText="Tab 1" />);
 
-  const tab2 = screen.getByRole("tab", { name: "Tab 2" });
+  const tab = screen.getByRole("tab", { name: "Tab 1" });
 
-  expect(tab2).toHaveAttribute("aria-selected", "false");
+  expect(tab).toHaveAttribute("aria-selected", "false");
 });
 
-it("is selected when matching activeTab", () => {
-  render(
-    <TabsGroup defaultActiveTab="tab1">
-      <TabList>
-        <Tab value="tab1" labelText="Tab 1" />
-      </TabList>
-    </TabsGroup>
-  );
+it("can be selected via isSelected prop", () => {
+  render(<Tab value="tab1" labelText="Tab 1" isSelected={true} />);
 
   const tab = screen.getByRole("tab", { name: "Tab 1" });
 
   expect(tab).toHaveAttribute("aria-selected", "true");
 });
 
-it("gets variant from context", () => {
+it("supports pill variant via prop", () => {
+  render(<Tab value="tab1" labelText="Tab 1" variant="pill" />);
+
+  const tab = screen.getByRole("tab", { name: "Tab 1" });
+
+  expect(tab).toHaveClass("tab-pill");
+});
+
+it("supports underline variant via prop", () => {
+  render(<Tab value="tab1" labelText="Tab 1" variant="underline" />);
+
+  const tab = screen.getByRole("tab", { name: "Tab 1" });
+
+  expect(tab).toHaveClass("tab-underline");
+});
+
+it("calls onTabSelect when clicked in standalone mode", async () => {
+  const user = userEvent.setup();
+  const handleSelect = vi.fn();
+
+  render(<Tab value="tab1" labelText="Tab 1" onTabSelect={handleSelect} />);
+
+  const tab = screen.getByRole("tab", { name: "Tab 1" });
+
+  await user.click(tab);
+
+  expect(handleSelect).toHaveBeenCalledWith("tab1");
+});
+
+it("gets variant from context when used in TabsGroup", () => {
   const { rerender } = render(
     <TabsGroup variant="pill" defaultActiveTab="tab1">
       <TabList>
@@ -71,22 +81,24 @@ it("gets variant from context", () => {
   expect(tabUnderline).toHaveClass("tab-underline");
 });
 
-it("applies additional props", () => {
+it("gets selection state from context when used in TabsGroup", () => {
   render(
     <TabsGroup defaultActiveTab="tab1">
       <TabList>
-        <Tab value="tab1" labelText="Tab 1" data-test="test-value" />
+        <Tab value="tab1" labelText="Tab 1" />
+        <Tab value="tab2" labelText="Tab 2" />
       </TabList>
     </TabsGroup>
   );
 
-  const tab = screen.getByRole("tab", { name: "Tab 1" });
+  const tab1 = screen.getByRole("tab", { name: "Tab 1" });
+  const tab2 = screen.getByRole("tab", { name: "Tab 2" });
 
-  expect(tab).toHaveAttribute("id", "tab-tab1");
-  expect(tab).toHaveAttribute("data-test", "test-value");
+  expect(tab1).toHaveAttribute("aria-selected", "true");
+  expect(tab2).toHaveAttribute("aria-selected", "false");
 });
 
-it("calls setActiveTab on click", async () => {
+it("updates context state when clicked in TabsGroup", async () => {
   const user = userEvent.setup();
 
   render(
@@ -110,15 +122,20 @@ it("calls setActiveTab on click", async () => {
   expect(tab2).toHaveAttribute("aria-selected", "true");
 });
 
+it("applies additional props", () => {
+  render(<Tab value="tab1" labelText="Tab 1" data-test="test-value" />);
+
+  const tab = screen.getByRole("tab", { name: "Tab 1" });
+
+  expect(tab).toHaveAttribute("id", "tab-tab1");
+  expect(tab).toHaveAttribute("data-test", "test-value");
+});
+
 it("renders children when provided", () => {
   render(
-    <TabsGroup defaultActiveTab="tab1">
-      <TabList>
-        <Tab value="tab1" labelText="Tab 1">
-          <span data-testid="badge">3</span>
-        </Tab>
-      </TabList>
-    </TabsGroup>
+    <Tab value="tab1" labelText="Tab 1">
+      <span data-testid="badge">3</span>
+    </Tab>
   );
 
   const badge = screen.getByTestId("badge");
@@ -129,12 +146,10 @@ it("renders children when provided", () => {
 
 it("sets correct ARIA attributes", () => {
   render(
-    <TabsGroup defaultActiveTab="tab1">
-      <TabList>
-        <Tab value="tab1" labelText="Tab 1" />
-        <Tab value="tab2" labelText="Tab 2" />
-      </TabList>
-    </TabsGroup>
+    <>
+      <Tab value="tab1" labelText="Tab 1" isSelected={true} />
+      <Tab value="tab2" labelText="Tab 2" isSelected={false} />
+    </>
   );
 
   const tab1 = screen.getByRole("tab", { name: "Tab 1" });
@@ -147,4 +162,19 @@ it("sets correct ARIA attributes", () => {
   expect(tab2).toHaveAttribute("aria-controls", "panel-tab2");
   expect(tab2).toHaveAttribute("id", "tab-tab2");
   expect(tab2).toHaveAttribute("tabIndex", "-1");
+});
+
+it("prop variant overridden by context variant", () => {
+  render(
+    <TabsGroup variant="underline" defaultActiveTab="tab1">
+      <TabList>
+        <Tab value="tab1" labelText="Tab 1" variant="pill" />
+      </TabList>
+    </TabsGroup>
+  );
+
+  const tab = screen.getByRole("tab", { name: "Tab 1" });
+
+  expect(tab).toHaveClass("tab-underline");
+  expect(tab).not.toHaveClass("tab-pill");
 });
