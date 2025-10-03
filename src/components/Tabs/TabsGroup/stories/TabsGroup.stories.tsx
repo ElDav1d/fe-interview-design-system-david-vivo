@@ -55,11 +55,8 @@ const meta: Meta<typeof TabsGroup> = {
 export default meta;
 type Story = StoryObj<typeof TabsGroup>;
 
-/**
- * Default pill variant with uncontrolled mode.
- * Uses defaultActiveTab to set initial selection.
- */
 export const PillVariant: Story = {
+  name: "Pill Variant",
   args: {
     variant: "pill",
     defaultActiveTab: "emails",
@@ -129,13 +126,18 @@ export const PillVariant: Story = {
       </TabsGroup>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Default pill variant in uncontrolled mode. TabsGroup manages tab state and provides context to all Tab and TabPanel components automatically.",
+      },
+    },
+  },
 };
 
-/**
- * Underline variant with uncontrolled mode.
- * Shows alternative visual style for tabs.
- */
 export const UnderlineVariant: Story = {
+  name: "Underline Variant",
   args: {
     variant: "underline",
     defaultActiveTab: "dashboard",
@@ -229,13 +231,18 @@ export const UnderlineVariant: Story = {
       </TabsGroup>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Underline variant provides an alternative visual style. All tabs and panels automatically receive the variant from TabsGroup context.",
+      },
+    },
+  },
 };
 
-/**
- * Controlled mode - external state management.
- * Parent component controls which tab is active.
- */
 export const ControlledMode: Story = {
+  name: "Controlled Mode",
   render: function ControlledExample() {
     const [activeTab, setActiveTab] = useState("inbox");
 
@@ -289,13 +296,18 @@ export const ControlledMode: Story = {
       </div>
     );
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Controlled mode allows external state management. Use value and onChange props to control which tab is active from outside the component.",
+      },
+    },
+  },
 };
 
-/**
- * Custom className applied to the TabsGroup container.
- * Useful for custom styling or layout adjustments.
- */
 export const WithCustomClassName: Story = {
+  name: "With Custom ClassName",
   args: {
     variant: "pill",
     defaultActiveTab: "home",
@@ -356,13 +368,18 @@ export const WithCustomClassName: Story = {
       </TabsGroup>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Apply custom styling via className prop for flexible layout adjustments while maintaining all TabsGroup functionality.",
+      },
+    },
+  },
 };
 
-/**
- * Tabs with children placeholder (for future Badge support).
- * Shows where additional content like badges or icons will appear.
- */
-export const WithChildrenPlaceholder: Story = {
+export const WithBadges: Story = {
+  name: "With Badges",
   args: {
     variant: "pill",
     defaultActiveTab: "notifications",
@@ -490,13 +507,18 @@ export const WithChildrenPlaceholder: Story = {
       </TabsGroup>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Tabs can include custom content like badges to show counts or notifications. Use the children prop to add badges, icons, or other React nodes.",
+      },
+    },
+  },
 };
 
-/**
- * TabsGroup rendered as different HTML elements using the "as" prop.
- * Useful for semantic HTML (section, nav, etc.).
- */
 export const AsSemanticElement: Story = {
+  name: "As Semantic Element",
   args: {
     variant: "underline",
     defaultActiveTab: "products",
@@ -589,14 +611,18 @@ export const AsSemanticElement: Story = {
       </TabsGroup>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Use the as prop to render TabsGroup as different HTML elements (section, nav, etc.) for semantic HTML structure.",
+      },
+    },
+  },
 };
 
-/**
- * Complete example with all features combined.
- * Shows TabsGroup, TabList, Tab, and TabPanel working together
- * with custom styling and content.
- */
 export const CompleteExample: Story = {
+  name: "Complete Example",
   args: {
     variant: "pill",
     defaultActiveTab: "profile",
@@ -789,4 +815,12 @@ export const CompleteExample: Story = {
       </TabsGroup>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Complete example combining all features: custom styling, badges, semantic elements, and full tab system with forms and interactive content.",
+      },
+    },
+  },
 };

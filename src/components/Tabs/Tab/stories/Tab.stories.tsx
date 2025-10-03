@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Tab from "../Tab";
 import TabsGroup from "../../TabsGroup/TabsGroup";
-import TabList from "../../TabList/TabList";
-import { useState } from "react";
 
 const meta: Meta<typeof Tab> = {
   title: "Components/Tabs/Tab",

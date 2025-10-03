@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import TabList from "../TabList";
 import Tab from "../../Tab/Tab";
-import TabsGroup from "../../TabsGroup/TabsGroup";
 import "./TabList.stories.scss";
 
 const meta: Meta<typeof TabList> = {
