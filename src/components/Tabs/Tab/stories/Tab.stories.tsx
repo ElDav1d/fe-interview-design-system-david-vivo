@@ -49,6 +49,15 @@ const meta: Meta<typeof Tab> = {
         type: { summary: "ReactNode" },
       },
     },
+    onTabSelect: {
+      description:
+        "Callback fired when the tab is clicked. Receives the tab value as argument. Can be used in standalone mode for custom logic, analytics, navigation, etc.",
+      table: {
+        type: { summary: "(value: string) => void" },
+        defaultValue: { summary: "undefined" },
+      },
+      action: "tabSelect",
+    },
   },
   tags: ["autodocs"],
 };
@@ -120,6 +129,27 @@ export const WithChildren: Story = {
       description: {
         story:
           "The children prop allows adding custom content like badges, icons, or other React nodes after the label. Works with both context and standalone modes.",
+      },
+    },
+  },
+};
+
+export const WithCallback: Story = {
+  name: "With onTabSelect callback",
+  args: {
+    value: "tab1",
+    labelText: "Tab 1",
+    variant: "pill",
+    isSelected: false,
+    onTabSelect: (value: string) => {
+      alert(`Tab selected: ${value}`);
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates manual usage of the onTabSelect callback. You can provide any function to handle tab selection events, such as analytics, navigation, or custom logic. This works in standalone mode and can be configured via the Storybook UI.",
       },
     },
   },
