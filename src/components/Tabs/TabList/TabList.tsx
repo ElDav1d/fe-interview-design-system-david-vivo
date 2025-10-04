@@ -31,16 +31,20 @@ const validateChildren = (children: ReactNode): void => {
 
     // Check if it's a Tab component
     if (child.type !== Tab) {
-      const childName =
-        typeof child.type === "function"
-          ? child.type.name || "Unknown"
-          : child.type;
+      const childName = getChildName(child.type);
 
       throw new Error(
         `TabList only accepts Tab components or text nodes as children. Received: ${childName}`
       );
     }
   });
+};
+
+const getChildName = (childType: unknown): string => {
+  if (typeof childType === "function") {
+    return childType.name || "Unknown";
+  }
+  return String(childType);
 };
 
 const TabList = ({ className = "", children, ...rest }: TabListProps) => {

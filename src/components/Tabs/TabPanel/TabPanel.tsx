@@ -47,17 +47,52 @@ const TabPanel = ({
 }: TabPanelProps) => {
   const context = useTabsContext();
 
+  // Helper to determine if panel should be visible
+  const getIsVisible = (
+    isUsingContext: boolean,
+    contextActiveTab?: string,
+    value?: string,
+    isSelected?: boolean
+  ) => {
+    if (isUsingContext && contextActiveTab) {
+      return contextActiveTab === value;
+    }
+    return isSelected ?? false;
+  };
+
   // Determine visibility: context mode takes precedence over standalone mode
-  const isVisible = value && context ? context.activeTab === value : isSelected;
+  const isUsingContext = value && context;
+
+  const isVisible = getIsVisible(
+    Boolean(isUsingContext),
+    context?.activeTab,
+    value,
+    isSelected
+  );
 
   // Generate ID: use provided ID, or generate from value, or fall back to undefined
-  const panelId = providedId || (value ? `panel-${value}` : undefined);
+  const getPanelId = (providedId?: string, value?: string) => {
+    if (providedId) {
+      return providedId;
+    }
+    if (value) {
+      return `panel-${value}`;
+    }
+    return undefined;
+  };
+
+  const getAriaLabelledBy = (value?: string) => {
+    if (value) {
+      return `tab-${value}`;
+    }
+    return undefined;
+  };
 
   return (
     <div
       role="tabpanel"
-      id={panelId}
-      aria-labelledby={value ? `tab-${value}` : undefined}
+      id={getPanelId(providedId, value)}
+      aria-labelledby={getAriaLabelledBy(value)}
       hidden={!isVisible}
       {...rest}
     >

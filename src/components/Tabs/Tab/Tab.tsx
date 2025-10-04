@@ -81,6 +81,14 @@ const Tab = ({
     }
   };
 
+  // Helper to determine if tab should be keyboard-focusable
+  const getTabIndex = (isSelected: boolean) => {
+    if (isSelected) {
+      return 0; // Focusable via keyboard
+    }
+    return -1; // Not focusable via keyboard
+  };
+
   return (
     <button
       className={`tab-${variant} ${className}`.trim()}
@@ -88,7 +96,7 @@ const Tab = ({
       aria-selected={isSelected}
       aria-controls={`panel-${value}`}
       id={`tab-${value}`}
-      tabIndex={isSelected ? 0 : -1}
+      tabIndex={getTabIndex(isSelected)}
       onClick={handleClick}
       {...rest}
     >
