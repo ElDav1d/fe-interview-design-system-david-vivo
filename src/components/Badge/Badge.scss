@@ -1,0 +1,30 @@
+@use "../../styles/mixins.scss" as *;
+
+.badge {
+	@include font-body-S;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--color-on-neutral);
+	font-weight: var(--typography-font-weight-bold);
+	padding: var(--spacing-4xs) var(--spacing-3xs);
+	border-radius: var(--borderRadius-badge);
+
+	@include bp-tablet-up {
+		padding: var(--spacing-3xs) var(--spacing-2xs);
+		border-radius: var(--borderRadius-badge-dsk);
+	}
+
+	&-neutral {
+		background-color: var(--color-surface-high);
+	}
+
+	&-positive {
+		background-color: var(--color-surface-positive);
+	}
+
+	&-negative {
+		background-color: var(--color-surface-negative);
+	}
+}
