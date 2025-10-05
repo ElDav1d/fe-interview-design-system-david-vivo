@@ -1,4 +1,4 @@
-export { default as TabsGroup } from "./TabsGroup";
+export { default } from "./TabsGroup";
 export { useTabs, useTabsContext, TabsProvider } from "./context";
 export type {
   TabsContextValue,
