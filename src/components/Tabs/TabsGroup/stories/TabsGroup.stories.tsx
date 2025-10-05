@@ -4,6 +4,7 @@ import TabsGroup from "../TabsGroup";
 import TabList from "../../TabList/TabList";
 import Tab from "../../Tab/Tab";
 import TabPanel from "../../TabPanel/TabPanel";
+import Badge from "../../../Badge/Badge";
 
 const meta: Meta<typeof TabsGroup> = {
   title: "Components/Tabs/TabsGroup",
@@ -62,7 +63,7 @@ export const PillVariant: Story = {
     defaultActiveTab: "emails",
   },
   render: (args) => (
-    <div style={{ width: "600px" }}>
+    <div className="tabsgroup-story-wrapper">
       <TabsGroup {...args}>
         <TabList>
           <Tab value="emails" labelText="Emails" />
@@ -71,13 +72,7 @@ export const PillVariant: Story = {
         </TabList>
 
         <TabPanel value="emails">
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel">
             <h3>Emails</h3>
             <p>You have 12 unread emails in your inbox.</p>
             <ul>
@@ -89,13 +84,7 @@ export const PillVariant: Story = {
         </TabPanel>
 
         <TabPanel value="files">
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel">
             <h3>Files</h3>
             <p>Your recent files and documents.</p>
             <ul>
@@ -107,13 +96,7 @@ export const PillVariant: Story = {
         </TabPanel>
 
         <TabPanel value="settings">
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel">
             <h3>Settings</h3>
             <p>Configure your account preferences.</p>
             <ul>
@@ -143,7 +126,7 @@ export const UnderlineVariant: Story = {
     defaultActiveTab: "dashboard",
   },
   render: (args) => (
-    <div style={{ width: "600px" }}>
+    <div className="tabsgroup-story-wrapper">
       <TabsGroup {...args}>
         <TabList>
           <Tab value="dashboard" labelText="Dashboard" />
@@ -152,13 +135,7 @@ export const UnderlineVariant: Story = {
         </TabList>
 
         <TabPanel value="dashboard">
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel">
             <h3>Dashboard</h3>
             <p>Overview of your key metrics and performance indicators.</p>
             <div
@@ -194,13 +171,7 @@ export const UnderlineVariant: Story = {
         </TabPanel>
 
         <TabPanel value="analytics">
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel">
             <h3>Analytics</h3>
             <p>Detailed analytics and user behavior insights.</p>
             <ul>
@@ -212,13 +183,7 @@ export const UnderlineVariant: Story = {
         </TabPanel>
 
         <TabPanel value="reports">
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel">
             <h3>Reports</h3>
             <p>Generate and view your custom reports.</p>
             <ul>
@@ -247,7 +212,7 @@ export const ControlledMode: Story = {
     const [activeTab, setActiveTab] = useState("inbox");
 
     return (
-      <div style={{ width: "600px" }}>
+      <div className="tabsgroup-story-wrapper">
         <h2>
           This is the parent component and it controls the active tab. It stores
           its value its local state, then it prints it.
@@ -266,21 +231,21 @@ export const ControlledMode: Story = {
           </TabList>
 
           <TabPanel value="inbox">
-            <div style={{ padding: "20px", border: "1px solid #e0e0e0" }}>
+            <div className="tabsgroup-story-panel">
               <h3>Inbox</h3>
               <p>You have 5 new messages.</p>
             </div>
           </TabPanel>
 
           <TabPanel value="sent">
-            <div style={{ padding: "20px", border: "1px solid #e0e0e0" }}>
+            <div className="tabsgroup-story-panel">
               <h3>Sent</h3>
               <p>You have sent 42 messages.</p>
             </div>
           </TabPanel>
 
           <TabPanel value="drafts">
-            <div style={{ padding: "20px", border: "1px solid #e0e0e0" }}>
+            <div className="tabsgroup-story-panel">
               <h3>Drafts</h3>
               <p>You have 3 draft messages.</p>
             </div>
@@ -307,17 +272,8 @@ export const WithCustomClassName: Story = {
     className: "custom-tabs-container",
   },
   render: (args) => (
-    <div style={{ width: "600px" }}>
-      <style>
-        {`
-          .custom-tabs-container {
-            padding: 20px;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-          }
-        `}
-      </style>
+    <div className="tabsgroup-story-wrapper">
+      {/* Custom className styling is handled by the consumer's CSS, not by story SCSS */}
       <TabsGroup {...args}>
         <TabList>
           <Tab value="home" labelText="Home" />
@@ -326,7 +282,7 @@ export const WithCustomClassName: Story = {
         </TabList>
 
         <TabPanel value="home">
-          <div style={{ padding: "20px", marginTop: "16px" }}>
+          <div className="tabsgroup-story-panel">
             <h3>Welcome Home</h3>
             <p>This TabsGroup has custom styling applied via className.</p>
             <p>
@@ -337,7 +293,7 @@ export const WithCustomClassName: Story = {
         </TabPanel>
 
         <TabPanel value="products">
-          <div style={{ padding: "20px", marginTop: "16px" }}>
+          <div className="tabsgroup-story-panel">
             <h3>Our Products</h3>
             <p>Browse our product catalog and offerings.</p>
             <ul>
@@ -349,7 +305,7 @@ export const WithCustomClassName: Story = {
         </TabPanel>
 
         <TabPanel value="about">
-          <div style={{ padding: "20px", marginTop: "16px" }}>
+          <div className="tabsgroup-story-panel">
             <h3>About Us</h3>
             <p>Learn more about our company and mission.</p>
             <p>
@@ -378,56 +334,38 @@ export const WithBadges: Story = {
     defaultActiveTab: "notifications",
   },
   render: (args) => (
-    <div style={{ width: "600px" }}>
+    <div className="tabsgroup-story-wrapper">
       <TabsGroup {...args}>
         <TabList>
           <Tab value="notifications" labelText="Notifications">
-            <span
-              style={{
-                marginLeft: "8px",
-                padding: "2px 6px",
-                backgroundColor: "#e74c3c",
-                color: "white",
-                borderRadius: "10px",
-                fontSize: "12px",
-              }}
+            <Badge
+              variant="negative"
+              role="status"
+              aria-label="3 unread notifications"
+              aria-live="polite"
             >
               3
-            </span>
+            </Badge>
           </Tab>
           <Tab value="messages" labelText="Messages">
-            <span
-              style={{
-                marginLeft: "8px",
-                padding: "2px 6px",
-                backgroundColor: "#3498db",
-                color: "white",
-                borderRadius: "10px",
-                fontSize: "12px",
-              }}
+            <Badge
+              variant="neutral"
+              role="status"
+              aria-label="12 unread messages"
+              aria-live="polite"
             >
               12
-            </span>
+            </Badge>
+          </Tab>
+          <Tab value="completed" labelText="Completed">
+            <Badge variant="positive">Done</Badge>
           </Tab>
           <Tab value="alerts" labelText="Alerts" />
         </TabList>
 
-        <TabPanel
-          value="notifications"
-          aria-label="Notifications. You have 3 new notifications including system updates and feature announcements."
-        >
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+        <TabPanel value="notifications">
+          <div className="tabsgroup-story-panel">
             <h3>Notifications (3 new)</h3>
-            <p style={{ color: "#666", marginBottom: "12px" }}>
-              You have 3 new notifications including system updates and feature
-              announcements.
-            </p>
             <div
               style={{
                 borderBottom: "1px solid #eee",
@@ -464,21 +402,10 @@ export const WithBadges: Story = {
           </div>
         </TabPanel>
 
-        <TabPanel
-          value="messages"
-          aria-label="Messages. You have 12 new messages from your team members."
-        >
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+        <TabPanel value="messages">
+          <div className="tabsgroup-story-panel">
             <h3>Messages (12 unread)</h3>
-            <p style={{ color: "#666", marginBottom: "12px" }}>
-              You have 12 new messages from your team members.
-            </p>
+            <p>You have 12 new messages from your team members.</p>
             <ul>
               <li>
                 <strong>John:</strong> Meeting at 3pm today
@@ -493,21 +420,22 @@ export const WithBadges: Story = {
           </div>
         </TabPanel>
 
-        <TabPanel
-          value="alerts"
-          aria-label="Alerts. No new alerts at this time. You're all caught up!"
-        >
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+        <TabPanel value="completed">
+          <div className="tabsgroup-story-panel">
+            <h3>Completed Tasks</h3>
+            <p>All your tasks are complete! Great work!</p>
+            <ul>
+              <li>✅ Design review - Completed</li>
+              <li>✅ Code review - Completed</li>
+              <li>✅ Documentation - Completed</li>
+            </ul>
+          </div>
+        </TabPanel>
+
+        <TabPanel value="alerts">
+          <div className="tabsgroup-story-panel">
             <h3>Alerts</h3>
-            <p style={{ color: "#666", marginBottom: "12px" }}>
-              No new alerts at this time. You're all caught up!
-            </p>
+            <p>No new alerts at this time.</p>
             <p style={{ color: "#666" }}>
               You're all caught up! We'll notify you when something needs your
               attention.
@@ -521,7 +449,7 @@ export const WithBadges: Story = {
     docs: {
       description: {
         story:
-          "Tabs can include custom content like badges to show counts or notifications. Use the children prop to add badges, icons, or other React nodes.",
+          "Complete example showing TabsGroup with Badge components. Demonstrates all three Badge variants (negative, neutral, positive) integrated with Tab components.",
       },
     },
   },
@@ -535,7 +463,7 @@ export const AsSemanticElement: Story = {
     as: "nav",
   },
   render: (args) => (
-    <div style={{ width: "600px" }}>
+    <div className="tabsgroup-story-wrapper">
       <TabsGroup {...args}>
         <TabList>
           <Tab value="home" labelText="Home" />
@@ -545,13 +473,7 @@ export const AsSemanticElement: Story = {
         </TabList>
 
         <TabPanel value="home">
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel">
             <h3>Home</h3>
             <p>
               Welcome to our website. This TabsGroup is rendered as a
@@ -565,13 +487,7 @@ export const AsSemanticElement: Story = {
         </TabPanel>
 
         <TabPanel value="products">
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel">
             <h3>Products</h3>
             <p>Explore our range of products designed to meet your needs.</p>
             <ul>
@@ -583,13 +499,7 @@ export const AsSemanticElement: Story = {
         </TabPanel>
 
         <TabPanel value="services">
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel">
             <h3>Services</h3>
             <p>Our comprehensive services to support your business growth.</p>
             <ul>
@@ -601,13 +511,7 @@ export const AsSemanticElement: Story = {
         </TabPanel>
 
         <TabPanel value="contact">
-          <div
-            style={{
-              padding: "20px",
-              border: "1px solid #e0e0e0",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel">
             <h3>Contact Us</h3>
             <p>Get in touch with our team.</p>
             <p>
@@ -639,25 +543,14 @@ export const CompleteExample: Story = {
     as: "section",
   },
   render: (args) => (
-    <div style={{ width: "700px" }}>
+    <div className="tabsgroup-story-wrapper" style={{ width: "700px" }}>
       <h2 style={{ marginBottom: "20px" }}>User Settings</h2>
       <TabsGroup {...args}>
         <TabList>
           <Tab value="profile" labelText="Profile" />
           <Tab value="security" labelText="Security" />
           <Tab value="preferences" labelText="Preferences">
-            <span
-              style={{
-                marginLeft: "8px",
-                padding: "2px 6px",
-                backgroundColor: "#f39c12",
-                color: "white",
-                borderRadius: "10px",
-                fontSize: "12px",
-              }}
-            >
-              New
-            </span>
+            <Badge variant="positive">New</Badge>
           </Tab>
         </TabList>
 
@@ -665,14 +558,7 @@ export const CompleteExample: Story = {
           value="profile"
           aria-label="Profile Settings. Update your display name and bio information."
         >
-          <div
-            style={{
-              padding: "24px",
-              border: "1px solid #e0e0e0",
-              borderRadius: "4px",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel" style={{ padding: "24px" }}>
             <h3 style={{ marginTop: 0 }}>Profile Settings</h3>
             <p style={{ color: "#666", marginBottom: "16px" }}>
               Update your display name and bio information.
@@ -735,14 +621,7 @@ export const CompleteExample: Story = {
           value="security"
           aria-label="Security Settings. Manage two-factor authentication and update your password."
         >
-          <div
-            style={{
-              padding: "24px",
-              border: "1px solid #e0e0e0",
-              borderRadius: "4px",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel" style={{ padding: "24px" }}>
             <h3 style={{ marginTop: 0 }}>Security Settings</h3>
             <p style={{ color: "#666", marginBottom: "16px" }}>
               Manage two-factor authentication and update your password.
@@ -788,14 +667,7 @@ export const CompleteExample: Story = {
           value="preferences"
           aria-label="Preferences. Configure your notification settings and communication preferences."
         >
-          <div
-            style={{
-              padding: "24px",
-              border: "1px solid #e0e0e0",
-              borderRadius: "4px",
-              marginTop: "16px",
-            }}
-          >
+          <div className="tabsgroup-story-panel" style={{ padding: "24px" }}>
             <h3 style={{ marginTop: 0 }}>Preferences</h3>
             <p style={{ color: "#666", marginBottom: "16px" }}>
               Configure your notification settings and communication
