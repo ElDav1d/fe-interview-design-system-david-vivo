@@ -114,7 +114,7 @@ const Tab = ({
       onClick={handleClick}
       {...rest}
     >
-      {labelText}
+      <span>{labelText}</span>
       {children}
     </button>
   );

@@ -9,6 +9,9 @@
 %tab-base {
   @include font-body-M;
 
+  display: inline-flex;
+  gap: var(--spacing-3xs);
+  align-items: center;
   color: var(--color-on-neutral);
   font-weight: var(--typography-font-weight-bold);
   height: var(--height-tab);
