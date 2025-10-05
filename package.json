@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build-tokens": "node scripts/build-tokens.ts",
-    "build-storybook": " run build-tokens && storybook build",
+    "build-storybook": "run build-tokens && storybook build",
     "dev": "npm run build-tokens && vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "prettier": "npm exec prettier src/ --write",
