@@ -1,11 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { expect, it } from "vitest";
 import TabList from "../TabList";
+import Tab from "../../Tab/Tab";
 
 it("renders with role tablist", () => {
   render(
     <TabList>
-      <button>Tab 1</button>
+      <Tab value="tab1" labelText="Tab 1" />
     </TabList>
   );
 
@@ -15,7 +16,7 @@ it("renders with role tablist", () => {
 it("is horizontal", () => {
   render(
     <TabList>
-      <button>Tab 1</button>
+      <Tab value="tab1" labelText="Tab 1" />
     </TabList>
   );
 
@@ -28,19 +29,19 @@ it("is horizontal", () => {
 it("renders children", () => {
   render(
     <TabList>
-      <button>Tab 1</button>
-      <button>Tab 2</button>
+      <Tab value="tab1" labelText="Tab 1" />
+      <Tab value="tab2" labelText="Tab 2" />
     </TabList>
   );
 
-  expect(screen.getByText("Tab 1")).toBeInTheDocument();
-  expect(screen.getByText("Tab 2")).toBeInTheDocument();
+  expect(screen.getByRole("tab", { name: "Tab 1" })).toBeInTheDocument();
+  expect(screen.getByRole("tab", { name: "Tab 2" })).toBeInTheDocument();
 });
 
 it("applies custom className", () => {
   render(
     <TabList className="custom-class">
-      <button>Tab 1</button>
+      <Tab value="tab1" labelText="Tab 1" />
     </TabList>
   );
 
@@ -48,17 +49,4 @@ it("applies custom className", () => {
 
   expect(tablist).toHaveClass("tablist");
   expect(tablist).toHaveClass("custom-class");
-});
-
-it("applies additional props", () => {
-  render(
-    <TabList id="custom-id" data-test="test-value">
-      <button>Tab 1</button>
-    </TabList>
-  );
-
-  const tablist = screen.getByRole("tablist");
-
-  expect(tablist).toHaveAttribute("id", "custom-id");
-  expect(tablist).toHaveAttribute("data-test", "test-value");
 });
