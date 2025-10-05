@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Tab from "../Tab";
 import TabsGroup from "../../TabsGroup/TabsGroup";
+import Badge from "../../../Badge/Badge";
+import "./Tab.stories.scss";
 
 const meta: Meta<typeof Tab> = {
   title: "Components/Tabs/Tab",
@@ -101,33 +103,72 @@ export const Underline: Story = {
 };
 
 export const WithChildren: Story = {
-  name: "With Children (e.g. Badge)",
+  name: "With Children (Badge)",
   args: {
     value: "tab1",
     labelText: "Notifications",
     variant: "pill",
     isSelected: false,
-    children: (
-      <span
-        style={{
-          backgroundColor: "#dc2626",
-          color: "white",
-          borderRadius: "10px",
-          padding: "2px 6px",
-          fontSize: "12px",
-          fontWeight: "bold",
-          marginLeft: "6px",
-        }}
-      >
-        3
-      </span>
-    ),
+    children: <Badge variant="negative">3</Badge>,
   },
   parameters: {
     docs: {
       description: {
         story:
-          "The children prop allows adding custom content like badges, icons, or other React nodes after the label. Works with both context and standalone modes.",
+          "The children prop allows adding Badge components after the label. Badge is the primary use case for Tab children.",
+      },
+    },
+  },
+};
+
+export const WithBadge: Story = {
+  name: "With Badge Variants",
+  render: () => (
+    <div className="tab-stories-badge-list">
+      <div className="tab-stories-badge-row">
+        <Tab value="tab1" labelText="Pill" variant="pill" isSelected={true}>
+          <Badge variant="neutral">Neutral</Badge>
+        </Tab>
+        <Tab value="tab2" labelText="Pill" variant="pill">
+          <Badge variant="positive">Positive</Badge>
+        </Tab>
+        <Tab value="tab3" labelText="Pill" variant="pill">
+          <Badge variant="negative">Negative</Badge>
+        </Tab>
+      </div>
+      <div className="tab-stories-badge-row">
+        <Tab
+          value="tab4"
+          labelText="Underline"
+          variant="underline"
+          isSelected={true}
+        >
+          <Badge variant="neutral">Neutral</Badge>
+        </Tab>
+        <Tab
+          value="tab5"
+          labelText="Underline"
+          variant="underline"
+          isSelected={true}
+        >
+          <Badge variant="positive">Positive</Badge>
+        </Tab>
+        <Tab
+          value="tab6"
+          labelText="Underline"
+          variant="underline"
+          isSelected={true}
+        >
+          <Badge variant="negative">Negative</Badge>
+        </Tab>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Tab components with Badge showing all three variants (neutral, positive, negative). Badge is rendered as children of Tab.",
       },
     },
   },
