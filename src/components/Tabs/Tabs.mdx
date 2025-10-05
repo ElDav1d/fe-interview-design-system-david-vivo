@@ -1,0 +1,252 @@
+# Tabs Component System
+
+A complete, accessible tabs system following WAI-ARIA guidelines.
+
+---
+
+## ✅ Required Usage (Production)
+
+```tsx
+import { TabsGroup, TabList, Tab, TabPanel } from "./components/Tabs";
+
+function MyComponent() {
+  return (
+    <TabsGroup defaultActiveTab="overview">
+      <TabList>
+        <Tab value="overview" labelText="Overview" />
+        <Tab value="details" labelText="Details" />
+      </TabList>
+
+      <TabPanel value="overview">
+        <p>Overview content</p>
+      </TabPanel>
+
+      <TabPanel value="details">
+        <p>Details content</p>
+      </TabPanel>
+    </TabsGroup>
+  );
+}
+```
+
+---
+
+## Architecture
+
+```
+TabsGroup (Context Provider)
+├── Provides: variant, activeTab, setActiveTab
+├── Manages: Selection state
+└── Children:
+    ├── TabList (Keyboard navigation)
+    │   └── Tab × N (Consumers)
+    │       ├── Reads: variant, activeTab
+    │       └── Updates: activeTab via setActiveTab
+    │
+    └── TabPanel × N (Consumers)
+        ├── Reads: activeTab
+        └── Auto-hides when value ≠ activeTab
+```
+
+---
+
+## Features
+
+### Accessibility
+
+- ✅ Full WAI-ARIA compliance
+- ✅ Keyboard navigation (Arrow keys, Home, End)
+- ✅ Screen reader support
+- ✅ Focus management
+- ✅ Proper ARIA attributes
+
+### Functionality
+
+- ✅ Uncontrolled mode (default)
+- ✅ Controlled mode (external state)
+- ✅ Multiple variants (pill, underline)
+- ✅ Automatic panel visibility
+- ✅ Custom styling support
+- ✅ Flexible composition
+- ✅ Polymorphic components (semantic HTML elements)
+
+### Developer Experience
+
+- ✅ TypeScript support
+- ✅ Comprehensive tests
+- ✅ Clear documentation
+- ✅ Storybook examples
+- ✅ Minimal boilerplate
+
+---
+
+## Polymorphic Components
+
+The `TabsGroup` component supports polymorphism through the `as` prop, allowing you to render it as any HTML element or custom component. This enables better semantic HTML and accessibility.
+
+### Using Semantic Elements
+
+```tsx
+// Render as a <section> element
+<TabsGroup as="section" defaultActiveTab="home">
+  <TabList>
+    <Tab value="home" labelText="Home" />
+    <Tab value="about" labelText="About" />
+  </TabList>
+  <TabPanel value="home">Home content</TabPanel>
+  <TabPanel value="about">About content</TabPanel>
+</TabsGroup>
+
+// Render as a <nav> element for navigation tabs
+<TabsGroup as="nav" aria-label="Main navigation" defaultActiveTab="products">
+  <TabList>
+    <Tab value="products" labelText="Products" />
+    <Tab value="services" labelText="Services" />
+  </TabList>
+  <TabPanel value="products">Products content</TabPanel>
+  <TabPanel value="services">Services content</TabPanel>
+</TabsGroup>
+
+// Render as an <article> element
+<TabsGroup as="article" defaultActiveTab="overview">
+  <TabList>
+    <Tab value="overview" labelText="Overview" />
+    <Tab value="specs" labelText="Specifications" />
+  </TabList>
+  <TabPanel value="overview">Overview content</TabPanel>
+  <TabPanel value="specs">Technical specs</TabPanel>
+</TabsGroup>
+```
+
+### Default Behavior
+
+By default, `TabsGroup` renders as a `<div>` element if no `as` prop is provided:
+
+```tsx
+// These are equivalent
+<TabsGroup defaultActiveTab="home">...</TabsGroup>
+<TabsGroup as="div" defaultActiveTab="home">...</TabsGroup>
+```
+
+---
+
+## Examples
+
+### Basic Example
+
+```tsx
+<TabsGroup defaultActiveTab="home">
+  <TabList>
+    <Tab value="home" labelText="Home" />
+    <Tab value="about" labelText="About" />
+  </TabList>
+  <TabPanel value="home">Home content</TabPanel>
+  <TabPanel value="about">About content</TabPanel>
+</TabsGroup>
+```
+
+### With Variants
+
+```tsx
+<TabsGroup variant="underline" defaultActiveTab="profile">
+  <TabList>
+    <Tab value="profile" labelText="Profile" />
+    <Tab value="settings" labelText="Settings" />
+  </TabList>
+  <TabPanel value="profile">Profile content</TabPanel>
+  <TabPanel value="settings">Settings content</TabPanel>
+</TabsGroup>
+```
+
+### Controlled Mode
+
+```tsx
+function ControlledTabs() {
+  const [activeTab, setActiveTab] = useState("inbox");
+
+  return (
+    <TabsGroup value={activeTab} onChange={setActiveTab}>
+      <TabList>
+        <Tab value="inbox" labelText="Inbox" />
+        <Tab value="sent" labelText="Sent" />
+      </TabList>
+      <TabPanel value="inbox">Inbox content</TabPanel>
+      <TabPanel value="sent">Sent content</TabPanel>
+    </TabsGroup>
+  );
+}
+```
+
+### With Custom Content
+
+```tsx
+<TabsGroup defaultActiveTab="notifications">
+  <TabList>
+    <Tab value="notifications" labelText="Notifications">
+      <span className="badge">3</span>
+    </Tab>
+    <Tab value="messages" labelText="Messages">
+      <span className="badge">12</span>
+    </Tab>
+  </TabList>
+  <TabPanel value="notifications">Notifications content</TabPanel>
+  <TabPanel value="messages">Messages content</TabPanel>
+</TabsGroup>
+```
+
+---
+
+## Best Practices
+
+### ✅ Do:
+
+- Use TabsGroup as the root container
+- Provide unique `value` props for Tab and TabPanel
+- Use `defaultActiveTab` for uncontrolled mode
+- Use `value` + `onChange` for controlled mode
+- Keep TabList and TabPanel as direct children of TabsGroup
+
+### ❌ Don't:
+
+- Use Tab or TabPanel without TabsGroup in production
+- Duplicate `value` props across tabs
+- Mix controlled and uncontrolled modes
+- Nest TabsGroup components
+- Use standalone mode outside of tests
+
+---
+
+## Related Components
+
+- [TabsGroup](?path=/docs/components-tabs-tabsgroup--docs) - Context provider and root container
+- [TabList](?path=/docs/components-tabs-tablist--docs) - Container with keyboard navigation
+- [Tab](?path=/docs/components-tabs-tab--docs) - Individual tab button
+- [TabPanel](?path=/docs/components-tabs-tabpanel--docs) - Content panel
+
+## Testing Mode (Not for Production)
+
+For unit tests, components can work standalone with manual props:
+
+```tsx
+// ⚠️ TESTING ONLY - Not for production use
+<Tab
+  value="tab1"
+  labelText="Tab 1"
+  variant="pill"
+  isSelected={true}
+  onTabSelect={(val) => console.log(val)}
+/>
+
+<TabPanel id="panel-1" isSelected={true}>
+  Content
+</TabPanel>
+```
+
+**This mode exists to:**
+
+- Facilitate unit testing without full setup
+- Test component props in isolation
+- Verify accessibility attributes
+- Test edge cases
+
+**❌ Do NOT use in production code.**

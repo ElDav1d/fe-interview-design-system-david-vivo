@@ -136,3 +136,22 @@ Some not clean decisions are:
 Is this **over-engineering**? Absolutely **yes**.
 
 **\*But** this pipeline is included to showcase my ability and intention to architect scalable, maintainable front-end systems, as would be expected in a real Design System context.
+
+## Accessibility Validation Note
+
+This component has been audited using VoiceOver on macOS, which is the native screen reader for Apple devices and known for its strict interpretation of ARIA roles and semantic structure.
+
+While I do not have access to a Windows environment, VoiceOver provides a reliable baseline for accessibility compliance. The component has been tested for:
+
+- Correct use of ARIA roles (`tablist`, `tab`, `tabpanel`)
+- Proper keyboard navigation (Arrow keys, Home/End, Enter/Space)
+- Focus management and `tabIndex` behavior
+- Semantic relationships via `aria-labelledby` and `aria-controls`
+- Visibility toggling using `hidden` attributes
+- Screen reader announcements and navigation flow
+
+These practices align with the [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) and are expected to behave consistently across major screen readers, including NVDA and JAWS on Windows.
+
+Additional automated checks were performed using Lighthouse and axe DevTools to ensure WCAG 2.1 AA compliance.
+
+If further validation is required in a Windows environment, I recommend testing with NVDA (free and widely used) or JAWS (industry standard) to confirm cross-platform consistency.
