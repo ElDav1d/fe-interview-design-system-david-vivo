@@ -13,25 +13,53 @@ It meets the requirements asserted in Introduction.mdx with an implementation ba
 # This project use `pnpm` as package manager, but you can use also `npm` or `yarn`.
 pnpm install
 
+# Run tests
+pnpm test
+
+# Generate variables.css from design-tokens.json
+pnpm build-tokens
+
 # Run the development server (http://localhost:5173)
 pnpm dev
 
 # Run Storybook (http://localhost:6006)
 pnpm storybook
-
-# Run tests
-pnpm test
-
-# Run tests in watch mode
-pnpm test:watch
-
-# Run tests with coverage
-pnpm test:coverage
 ```
 
 ## Figma file
 
 The figma file of the home test is available [here](https://www.figma.com/design/OclakAGLSXDoMKLFvwLNMP/%F0%9F%92%BB-Design-System-Home-Test---Tabs-Component?node-id=0-1&t=4pG7NN6HKxgxroDz-1).
+
+## Usage
+
+Import the components from the Design System:
+
+```tsx
+import { TabsGroup, TabList, Tab, TabPanel, Badge } from "./components/Tabs";
+
+function MyComponent() {
+  return (
+    <TabsGroup defaultActiveTab="home" variant="pill">
+      <TabList>
+        <Tab value="home" labelText="Home">
+          <Badge variant="negative">3</Badge>
+        </Tab>
+        <Tab value="profile" labelText="Profile" />
+      </TabList>
+      <TabPanel value="home">Content</TabPanel>
+      <TabPanel value="profile">Profile content</TabPanel>
+    </TabsGroup>
+  );
+}
+```
+
+### TypeScript Support
+
+All components are fully typed. Import types as needed:
+
+```tsx
+import type { TabVariant, BadgeVariant, TabProps } from "./components/Tabs";
+```
 
 ## Fake Design Tokens Pipeline
 
@@ -91,14 +119,16 @@ Invalid token 'color.background': must be an object with a 'value' string proper
 
 ```bash
 # Generate variables.css from design-tokens.json
-npm run build-tokens
+pnpm build-tokens
 
 # Start the project (automatically builds tokens)
-npm run dev
+pnpm dev
 
 # Start Storybook (automatically builds tokens)
-npm run storybook
+pnpm storybook
 ```
+
+> **Note:** The token build process runs automatically when you start the development server (`pnpm dev`) or Storybook (`pnpm storybook`). You only need to run `pnpm build-tokens` manually if you want to regenerate the CSS variables without starting a development server.
 
 ### Example
 
@@ -176,7 +206,6 @@ This project successfully delivers all requirements specified in the technical c
 
 The entire project was built following **strict TDD methodology** (Red → Green → Refactor):
 
-- **81 passing unit and integration tests** covering all components and edge cases
 - Tests written **before** implementation in every feature
 - Comprehensive coverage includes:
   - Component rendering and props
@@ -185,13 +214,6 @@ The entire project was built following **strict TDD methodology** (Red → Green
   - Context API state management
   - Controlled and uncontrolled modes
   - Accessibility features (focus management, screen reader support)
-
-**Test execution:**
-
-```bash
-npm test -- --run
-# Result: 81 tests passing, 0 failures
-```
 
 ### Clean Component API Design
 
