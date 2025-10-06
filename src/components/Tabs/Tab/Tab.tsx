@@ -20,6 +20,7 @@ import "./Tab.scss";
  *
  * @example
  * // ⚠️ TESTING ONLY
+ * <Tab
  *   value="overview"
  *   labelText="Overview"
  *   variant="pill"

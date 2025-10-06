@@ -5,6 +5,7 @@ import TabList from "../../TabList/TabList";
 import Tab from "../../Tab/Tab";
 import TabPanel from "../../TabPanel/TabPanel";
 import Badge from "../../../Badge/Badge";
+import "./TabsGroup.stories.scss";
 
 const meta: Meta<typeof TabsGroup> = {
   title: "Components/Tabs/TabsGroup",
